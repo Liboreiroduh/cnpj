@@ -5,10 +5,7 @@
   "scripts": {
     "dev": "next dev -p 3000",
     "build": "next build",
-    "start": "NODE_ENV=production node server.js",
-    "start:render": "NODE_ENV=production node server.js",
-    "start:standalone": "node start-render.js",
-    "health": "node health-check.js",
+    "start": "next start",
     "lint": "next lint",
     "db:push": "prisma db push",
     "db:generate": "prisma generate",

@@ -1,34 +1,110 @@
 'use client';
 
 import { useState } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Badge } from '@/components/ui/badge';
+import { Separator } from '@/components/ui/separator';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Search, Building2, MapPin, Phone, Mail, Users, Briefcase, AlertCircle, CheckCircle, Clock, Zap, Globe, Shield, Key, RefreshCw } from 'lucide-react';
 
 interface CNPJData {
+  // Dados principais
   cnpj?: string;
   razao_social?: string;
   nome_fantasia?: string;
-  capital_social?: number;
-  data_inicio_atividade?: string;
+  
+  // Situação cadastral
   situacao_cadastral?: {
     situacao?: string;
     data_situacao?: string;
     motivo?: string;
+    situacao_especial?: string;
+    data_situacao_especial?: string;
   };
+  
+  // Natureza jurídica e porte
+  natureza_juridica?: {
+    descricao?: string;
+  };
+  porte?: string;
+  
+  // Capital social e datas
+  capital_social?: number;
+  data_inicio_atividade?: string;
+  matriz_filial?: string;
+  
+  // CNAEs
+  cnae_principal?: {
+    codigo?: string;
+    descricao?: string;
+  };
+  cnaes_secundarios?: Array<{
+    codigo?: string;
+    descricao?: string;
+  }>;
+  
+  // Endereço
+  logradouro?: string;
+  numero?: string;
+  complemento?: string;
+  bairro?: string;
+  municipio?: string;
+  uf?: string;
+  cep?: string;
+  codigo_ibge?: string;
+  
+  // Contatos
+  telefones?: Array<{
+    ddd?: string;
+    numero?: string;
+    is_fax?: boolean;
+  }>;
+  email?: string;
+  
+  // Informações fiscais
+  opcao_simples?: string;
+  data_opcao_simples?: string;
+  opcao_mei?: string;
+  data_opcao_mei?: string;
+  
+  // Quadro societário (QSA)
+  quadro_societario?: Array<{
+    nome?: string;
+    documento?: string;
+    tipo?: string;
+    qualificacao?: string;
+    data_entrada?: string;
+    faixa_etaria?: string;
+  }>;
+  
+  // Metadata da API
   _api_info?: {
     fonte?: string;
     url?: string;
     timestamp?: string;
   };
+  
+  // Campo de aviso
+  _avisos?: {
+    titulo?: string;
+    mensagem?: string;
+  };
 }
 
-export default function ConsultaCNPJ() {
+export default function ConsultaCNPJMulti() {
   const [cnpjInput, setCnpjInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState<CNPJData | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const formatCNPJ = (value: string) => {
+    // Remove caracteres não numéricos primeiro
     const cleaned = value.replace(/\D/g, '');
     
+    // Aplica a máscara do CNPJ: XX.XXX.XXX/XXXX-XX
     if (cleaned.length <= 2) {
       return cleaned;
     } else if (cleaned.length <= 5) {
@@ -43,14 +119,32 @@ export default function ConsultaCNPJ() {
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let value = e.target.value;
+    
+    // Remove todos os caracteres não numéricos
+    const cleaned = value.replace(/\D/g, '');
+    
+    // Aplica a máscara apenas se houver números suficientes
+    if (cleaned.length > 0) {
+      value = formatCNPJ(cleaned);
+    }
+    
+    // Atualiza o estado com o valor mascarado
+    setCnpjInput(value);
+  };
+
+  const handleInputBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // Quando o usuário sai do campo, garante a formatação correta
     const value = e.target.value;
     const cleaned = value.replace(/\D/g, '');
     
-    // Formata enquanto digita, mas permite qualquer formato
-    if (cleaned.length > 0) {
+    if (cleaned.length === 14) {
       setCnpjInput(formatCNPJ(cleaned));
+    } else if (cleaned.length > 0) {
+      // Se não tem 14 dígitos, mostra sem máscara para o usuário ver o que precisa corrigir
+      setCnpjInput(cleaned);
     } else {
-      setCnpjInput(value);
+      setCnpjInput('');
     }
   };
 
@@ -61,15 +155,10 @@ export default function ConsultaCNPJ() {
   };
 
   const handleSearch = async () => {
-    // Pega apenas os números do input
     const cleanedCnpj = cnpjInput.replace(/\D/g, '');
     
-    console.log('Input original:', cnpjInput);
-    console.log('CNPJ limpo:', cleanedCnpj);
-    console.log('Tamanho:', cleanedCnpj.length);
-    
     if (cleanedCnpj.length !== 14) {
-      setError(`CNPJ inválido. Tem ${cleanedCnpj.length} dígitos, precisa de 14.`);
+      setError('CNPJ inválido. Deve conter 14 dígitos.');
       return;
     }
 
@@ -78,12 +167,8 @@ export default function ConsultaCNPJ() {
     setData(null);
 
     try {
-      console.log('Fazendo consulta para CNPJ:', cleanedCnpj);
       const response = await fetch(`/api/cnpj-multi?cnpj=${cleanedCnpj}`);
-      console.log('Status da resposta:', response.status);
-      
       const result = await response.json();
-      console.log('Resposta da API:', result);
 
       if (!response.ok) {
         setError(result.error || 'Erro ao consultar CNPJ');
@@ -92,7 +177,6 @@ export default function ConsultaCNPJ() {
 
       setData(result);
     } catch (err) {
-      console.error('Erro na consulta:', err);
       setError('Erro de conexão. Tente novamente.');
     } finally {
       setLoading(false);
@@ -104,10 +188,6 @@ export default function ConsultaCNPJ() {
       handleSearch();
     }
   };
-
-  // Verifica se tem 14 números para habilitar o botão
-  const cleanedCnpj = cnpjInput.replace(/\D/g, '');
-  const canSearch = cleanedCnpj.length === 14 && !loading;
 
   const formatCurrency = (value?: number) => {
     if (!value) return 'Não informado';
@@ -127,209 +207,485 @@ export default function ConsultaCNPJ() {
     }
   };
 
+  const maskDocument = (doc?: string) => {
+    if (!doc) return 'Não informado';
+    if (doc.length === 11) {
+      return doc.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+    }
+    if (doc.length === 14) {
+      return doc.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
+    }
+    return doc;
+  };
+
   return (
-    <div style={{ 
-      minHeight: '100vh', 
-      backgroundColor: '#f8fafc', 
-      padding: '1rem',
-      fontFamily: 'Arial, sans-serif'
-    }}>
-      <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+    <div className="min-h-screen bg-zinc-50 p-4">
+      <div className="max-w-6xl mx-auto space-y-6">
         {/* Cabeçalho */}
-        <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-          <h1 style={{ 
-            fontSize: '2rem', 
-            fontWeight: 'bold', 
-            color: '#1e293b',
-            marginBottom: '0.5rem'
-          }}>
-            Consulta CNPJ Multi-API
-          </h1>
-          <p style={{ color: '#64748b', fontSize: '1rem' }}>
-            Dados públicos via múltiplas APIs com bypass automático
-          </p>
+        <div className="text-center space-y-2">
+          <h1 className="text-3xl font-bold text-zinc-900">🕵️ Consulta CNPJ Multi-API</h1>
+          <p className="text-zinc-600">Bypass automático de rate limit com múltiplas fontes</p>
         </div>
 
         {/* Campo de Consulta */}
-        <div style={{ 
-          backgroundColor: 'white', 
-          borderRadius: '8px', 
-          padding: '1.5rem', 
-          marginBottom: '2rem', 
-          border: '1px solid #e2e8f0',
-          boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1)'
-        }}>
-          <div style={{ marginBottom: '1rem' }}>
-            <input
-              type="text"
-              placeholder="Digite o CNPJ: 45.259.906/0001-63"
-              value={cnpjInput}
-              onChange={handleInputChange}
-              onKeyPress={handleKeyPress}
-              style={{ 
-                width: '100%',
-                padding: '0.75rem',
-                border: '1px solid #d1d5db',
-                borderRadius: '6px',
-                fontSize: '1rem',
-                marginBottom: '0.75rem'
-              }}
-              maxLength={18}
-            />
-            <div style={{ fontSize: '0.875rem', marginBottom: '0.5rem' }}>
-              Dígitos: {cleanedCnpj.length}/14 
-              {cleanedCnpj.length === 14 && (
-                <span style={{ color: '#16a34a', fontWeight: 'bold' }}> ✅ CNPJ válido!</span>
-              )}
-              {cleanedCnpj.length > 0 && cleanedCnpj.length < 14 && (
-                <span style={{ color: '#dc2626' }}> ❌ Faltam {14 - cleanedCnpj.length} dígitos</span>
-              )}
+        <Card>
+          <CardContent className="p-6">
+            <div className="flex gap-3">
+              <Input
+                placeholder="Digite apenas números: 45259906000163"
+                value={cnpjInput}
+                onChange={handleInputChange}
+                onBlur={handleInputBlur}
+                onKeyPress={handleKeyPress}
+                className="flex-1"
+                maxLength={18}
+              />
+              <Button 
+                onClick={handleSearch} 
+                disabled={loading || cnpjInput.replace(/\D/g, '').length !== 14}
+                className="min-w-[120px]"
+              >
+                {loading ? (
+                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                ) : (
+                  <>
+                    <Zap className="w-4 h-4 mr-2" />
+                    Consultar Multi
+                  </>
+                )}
+              </Button>
+              <Button 
+                variant="outline"
+                onClick={clearInput}
+                disabled={loading}
+                className="min-w-[80px]"
+              >
+                Limpar
+              </Button>
             </div>
-          </div>
-          
-          <div style={{ display: 'flex', gap: '0.75rem', marginBottom: '1rem' }}>
-            <button 
-              onClick={handleSearch} 
-              disabled={!canSearch}
-              style={{ 
-                flex: 1,
-                padding: '0.75rem',
-                backgroundColor: canSearch ? '#3b82f6' : '#9ca3af',
-                color: 'white',
-                border: 'none',
-                borderRadius: '6px',
-                fontSize: '1rem',
-                fontWeight: 'bold',
-                cursor: canSearch ? 'pointer' : 'not-allowed'
-              }}
-            >
-              {loading ? 'Consultando...' : 'Consultar CNPJ'}
-            </button>
-            
-            <button 
-              onClick={clearInput}
-              disabled={loading}
-              style={{ 
-                padding: '0.75rem 1.5rem',
-                backgroundColor: loading ? '#f3f4f6' : 'white',
-                color: loading ? '#9ca3af' : '#374151',
-                border: '1px solid #d1d5db',
-                borderRadius: '6px',
-                fontSize: '1rem',
-                fontWeight: '500',
-                cursor: loading ? 'not-allowed' : 'pointer'
-              }}
-            >
-              Limpar
-            </button>
-          </div>
-          
-          <div style={{ fontSize: '0.875rem', color: '#64748b', marginBottom: '0.5rem' }}>
-            Digite o CNPJ em qualquer formato. O sistema vai formatar e validar automaticamente.
-          </div>
-          <div style={{ fontSize: '0.75rem', color: '#94a3b8' }}>
-            <strong>Teste:</strong> 45259906000163 | 45.259.906/0001-63 | 23246139000115
-          </div>
+            <div className="mt-2 text-sm text-zinc-600">
+              Digite apenas os 14 números do CNPJ. O sistema formatará automaticamente.
+            </div>
+            <div className="mt-2 text-xs text-zinc-500">
+              <strong>🧪 Teste Rate Limit:</strong> 45259906000163 | <strong>✅ Funcionais:</strong> 23246139000115 | 04259026000110 | 33592510000154
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Cards de Informação */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <Card className="bg-blue-50 border-blue-200">
+            <CardContent className="p-4">
+              <div className="flex items-center gap-2 mb-2">
+                <RefreshCw className="w-4 h-4 text-blue-600" />
+                <h3 className="font-semibold text-blue-900">Rotação Automática</h3>
+              </div>
+              <p className="text-sm text-blue-700">
+                4 APIs diferentes com fallback inteligente
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-green-50 border-green-200">
+            <CardContent className="p-4">
+              <div className="flex items-center gap-2 mb-2">
+                <Shield className="w-4 h-4 text-green-600" />
+                <h3 className="font-semibold text-green-900">Bypass 429</h3>
+              </div>
+              <p className="text-sm text-green-700">
+                Contorna automaticamente limites de requisição
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-purple-50 border-purple-200">
+            <CardContent className="p-4">
+              <div className="flex items-center gap-2 mb-2">
+                <Key className="w-4 h-4 text-purple-600" />
+                <h3 className="font-semibold text-purple-900">Multi-Identidade</h3>
+              </div>
+              <p className="text-sm text-purple-700">
+                User-Agents e headers variados
+              </p>
+            </CardContent>
+          </Card>
         </div>
 
         {/* Mensagens de Erro */}
         {error && (
-          <div style={{ 
-            marginBottom: '2rem', 
-            backgroundColor: '#fef2f2', 
-            border: '1px solid #fecaca',
-            borderRadius: '8px',
-            padding: '1rem',
-            color: '#991b1b'
-          }}>
-            <strong>Erro:</strong> {error}
-          </div>
+          <Alert variant={error.includes('Limite de consultas') || error.includes('Todas as APIs') ? 'default' : 'destructive'}>
+            <AlertCircle className="h-4 w-4" />
+            <AlertDescription>
+              {error}
+              {error.includes('Limite de consultas') && (
+                <div className="mt-2 text-sm">
+                  💡 <strong>Dica:</strong> O sistema tentará múltiplas APIs automaticamente. 
+                  Se todas falharem, aguarde alguns minutos.
+                </div>
+              )}
+              {error.includes('Todas as APIs') && (
+                <div className="mt-2 text-sm">
+                  🌐 <strong>Alternativas:</strong> Tente novamente mais tarde ou use outras fontes de dados.
+                </div>
+              )}
+            </AlertDescription>
+          </Alert>
+        )}
+
+        {/* Info da API usada */}
+        {data && data._api_info && (
+          <Alert>
+            <Globe className="h-4 w-4" />
+            <AlertDescription>
+              <div className="flex items-center justify-between">
+                <div>
+                  <strong>Fonte:</strong> {data._api_info.fonte}
+                  <div className="text-xs text-zinc-600 mt-1">
+                    Consultado em: {new Date(data._api_info.timestamp).toLocaleString('pt-BR')}
+                  </div>
+                </div>
+                <Badge variant="outline" className="text-xs">
+                  🚀 Multi-API Ativa
+                </Badge>
+              </div>
+            </AlertDescription>
+          </Alert>
         )}
 
         {/* Resultados */}
         {data && (
-          <div style={{ 
-            backgroundColor: 'white',
-            borderRadius: '8px', 
-            padding: '1.5rem', 
-            marginBottom: '2rem', 
-            border: '1px solid #e2e8f0'
-          }}>
-            <h2 style={{ 
-              fontSize: '1.25rem', 
-              fontWeight: 'bold', 
-              color: '#1e293b',
-              marginBottom: '1rem',
-              paddingBottom: '0.5rem',
-              borderBottom: '1px solid #e2e8f0'
-            }}>
-              📋 Dados da Empresa
-            </h2>
-            
-            {data.razao_social && (
-              <div style={{ marginBottom: '1rem' }}>
-                <strong>Razão Social:</strong><br />
-                <span style={{ color: '#374151' }}>{data.razao_social}</span>
-              </div>
+          <div className="space-y-6">
+            {/* BLOCO 1 - DADOS GERAIS */}
+            {(data.razao_social || data.nome_fantasia || data.cnpj || data.natureza_juridica?.descricao || data.porte) && (
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Building2 className="w-5 h-5" />
+                    Dados Gerais
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  {data.razao_social && (
+                    <div>
+                      <span className="font-semibold text-zinc-700">Razão Social:</span>
+                      <p className="text-zinc-900">{data.razao_social}</p>
+                    </div>
+                  )}
+                  {data.nome_fantasia && (
+                    <div>
+                      <span className="font-semibold text-zinc-700">Nome Fantasia:</span>
+                      <p className="text-zinc-900">{data.nome_fantasia}</p>
+                    </div>
+                  )}
+                  {data.cnpj && (
+                    <div>
+                      <span className="font-semibold text-zinc-700">CNPJ:</span>
+                      <p className="text-zinc-900">{formatCNPJ(data.cnpj)}</p>
+                    </div>
+                  )}
+                  {data.matriz_filial && (
+                    <div>
+                      <span className="font-semibold text-zinc-700">Tipo:</span>
+                      <Badge variant={data.matriz_filial === 'Matriz' ? 'default' : 'secondary'}>
+                        {data.matriz_filial}
+                      </Badge>
+                    </div>
+                  )}
+                  {data.data_inicio_atividade && (
+                    <div>
+                      <span className="font-semibold text-zinc-700">Data de Abertura:</span>
+                      <p className="text-zinc-900">{formatDate(data.data_inicio_atividade)}</p>
+                    </div>
+                  )}
+                  {data.natureza_juridica?.descricao && (
+                    <div>
+                      <span className="font-semibold text-zinc-700">Natureza Jurídica:</span>
+                      <p className="text-zinc-900">{data.natureza_juridica.descricao}</p>
+                    </div>
+                  )}
+                  {data.porte && (
+                    <div>
+                      <span className="font-semibold text-zinc-700">Porte:</span>
+                      <Badge variant="secondary">{data.porte}</Badge>
+                    </div>
+                  )}
+                  {data.capital_social !== undefined && (
+                    <div>
+                      <span className="font-semibold text-zinc-700">Capital Social:</span>
+                      <p className="text-zinc-900">{formatCurrency(data.capital_social)}</p>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
             )}
-            
-            {data.nome_fantasia && (
-              <div style={{ marginBottom: '1rem' }}>
-                <strong>Nome Fantasia:</strong><br />
-                <span style={{ color: '#374151' }}>{data.nome_fantasia}</span>
-              </div>
+
+            {/* BLOCO 2 - SITUAÇÃO CADASTRAL */}
+            {data.situacao_cadastral && (data.situacao_cadastral.situacao || data.situacao_cadastral.data_situacao || data.situacao_cadastral.motivo || data.situacao_cadastral.situacao_especial) && (
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <CheckCircle className="w-5 h-5" />
+                    Situação Cadastral
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  {data.situacao_cadastral.situacao && (
+                    <div>
+                      <span className="font-semibold text-zinc-700">Situação:</span>
+                      <Badge 
+                        variant={data.situacao_cadastral.situacao.includes('ATIVA') ? 'default' : 'destructive'}
+                        className="ml-2"
+                      >
+                        {data.situacao_cadastral.situacao}
+                      </Badge>
+                    </div>
+                  )}
+                  {data.situacao_cadastral.data_situacao && (
+                    <div>
+                      <span className="font-semibold text-zinc-700">Data da Situação:</span>
+                      <p className="text-zinc-900">{formatDate(data.situacao_cadastral.data_situacao)}</p>
+                    </div>
+                  )}
+                  {data.situacao_cadastral.motivo && (
+                    <div>
+                      <span className="font-semibold text-zinc-700">Motivo:</span>
+                      <p className="text-zinc-900">{data.situacao_cadastral.motivo}</p>
+                    </div>
+                  )}
+                  {data.situacao_cadastral.situacao_especial && (
+                    <div>
+                      <span className="font-semibold text-zinc-700">Situação Especial:</span>
+                      <p className="text-zinc-900">{data.situacao_cadastral.situacao_especial}</p>
+                    </div>
+                  )}
+                  {data.situacao_cadastral.data_situacao_especial && (
+                    <div>
+                      <span className="font-semibold text-zinc-700">Data da Situação Especial:</span>
+                      <p className="text-zinc-900">{formatDate(data.situacao_cadastral.data_situacao_especial)}</p>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
             )}
-            
-            {data.cnpj && (
-              <div style={{ marginBottom: '1rem' }}>
-                <strong>CNPJ:</strong><br />
-                <span style={{ color: '#374151' }}>{formatCNPJ(data.cnpj)}</span>
-              </div>
+
+            {/* BLOCO 3 - ENDEREÇO */}
+            {(data.logradouro || data.numero || data.bairro || data.municipio || data.uf || data.cep) && (
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <MapPin className="w-5 h-5" />
+                    Endereço
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  {data.logradouro && (
+                    <div>
+                      <span className="font-semibold text-zinc-700">Logradouro:</span>
+                      <p className="text-zinc-900">{data.logradouro}</p>
+                    </div>
+                  )}
+                  {data.numero && (
+                    <div>
+                      <span className="font-semibold text-zinc-700">Número:</span>
+                      <p className="text-zinc-900">{data.numero}</p>
+                    </div>
+                  )}
+                  {data.complemento && (
+                    <div>
+                      <span className="font-semibold text-zinc-700">Complemento:</span>
+                      <p className="text-zinc-900">{data.complemento}</p>
+                    </div>
+                  )}
+                  {data.bairro && (
+                    <div>
+                      <span className="font-semibold text-zinc-700">Bairro:</span>
+                      <p className="text-zinc-900">{data.bairro}</p>
+                    </div>
+                  )}
+                  {data.municipio && (
+                    <div>
+                      <span className="font-semibold text-zinc-700">Município:</span>
+                      <p className="text-zinc-900">{data.municipio}</p>
+                    </div>
+                  )}
+                  {data.uf && (
+                    <div>
+                      <span className="font-semibold text-zinc-700">UF:</span>
+                      <p className="text-zinc-900">{data.uf}</p>
+                    </div>
+                  )}
+                  {data.cep && (
+                    <div>
+                      <span className="font-semibold text-zinc-700">CEP:</span>
+                      <p className="text-zinc-900">{data.cep}</p>
+                    </div>
+                  )}
+                  {data.codigo_ibge && (
+                    <div>
+                      <span className="font-semibold text-zinc-700">Código IBGE:</span>
+                      <p className="text-zinc-900">{data.codigo_ibge}</p>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
             )}
-            
-            {data.data_inicio_atividade && (
-              <div style={{ marginBottom: '1rem' }}>
-                <strong>Data de Abertura:</strong><br />
-                <span style={{ color: '#374151' }}>{formatDate(data.data_inicio_atividade)}</span>
-              </div>
+
+            {/* BLOCO 4 - CONTATO */}
+            {(data.telefones && data.telefones.length > 0) || data.email && (
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Phone className="w-5 h-5" />
+                    Contato
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  {data.telefones && data.telefones.length > 0 && (
+                    <div>
+                      <span className="font-semibold text-zinc-700">Telefones:</span>
+                      <div className="space-y-1">
+                        {data.telefones.map((telefone, index) => (
+                          <div key={index} className="text-zinc-900">
+                            ({telefone.ddd}) {telefone.numero}
+                            {telefone.is_fax && <Badge variant="outline" className="ml-2 text-xs">FAX</Badge>}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  {data.email && (
+                    <div>
+                      <span className="font-semibold text-zinc-700">E-mail:</span>
+                      <p className="text-zinc-900">{data.email}</p>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
             )}
-            
-            {data.capital_social !== undefined && (
-              <div style={{ marginBottom: '1rem' }}>
-                <strong>Capital Social:</strong><br />
-                <span style={{ color: '#374151' }}>{formatCurrency(data.capital_social)}</span>
-              </div>
+
+            {/* BLOCO 5 - CNAE */}
+            {data.cnae_principal && (
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Briefcase className="w-5 h-5" />
+                    CNAE - Atividade Econômica
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div>
+                    <span className="font-semibold text-zinc-700">CNAE Principal:</span>
+                    <p className="text-zinc-900">
+                      <strong>{data.cnae_principal.codigo}</strong> - {data.cnae_principal.descricao}
+                    </p>
+                  </div>
+                  {data.cnaes_secundarios && data.cnaes_secundarios.length > 0 && (
+                    <div>
+                      <span className="font-semibold text-zinc-700">CNAEs Secundários:</span>
+                      <div className="space-y-1 max-h-32 overflow-y-auto">
+                        {data.cnaes_secundarios.map((cnae, index) => (
+                          <div key={index} className="text-sm text-zinc-900">
+                            <strong>{cnae.codigo}</strong> - {cnae.descricao}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
             )}
-            
-            {data.situacao_cadastral && data.situacao_cadastral.situacao && (
-              <div style={{ marginBottom: '1rem' }}>
-                <strong>Situação Cadastral:</strong><br />
-                <span style={{ 
-                  backgroundColor: data.situacao_cadastral.situacao.includes('ATIVA') ? '#dcfce7' : '#fef2f2',
-                  color: data.situacao_cadastral.situacao.includes('ATIVA') ? '#166534' : '#991b1b',
-                  padding: '0.25rem 0.75rem',
-                  borderRadius: '4px',
-                  fontSize: '0.875rem',
-                  fontWeight: '500'
-                }}>
-                  {data.situacao_cadastral.situacao}
-                </span>
-              </div>
+
+            {/* BLOCO 6 - INFORMAÇÕES FISCAIS */}
+            {(data.opcao_simples || data.opcao_mei) && (
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Clock className="w-5 h-5" />
+                    Informações Fiscais
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  {data.opcao_simples && (
+                    <div>
+                      <span className="font-semibold text-zinc-700">Optante pelo Simples Nacional:</span>
+                      <Badge variant={data.opcao_simples === 'S' ? 'default' : 'secondary'} className="ml-2">
+                        {data.opcao_simples === 'S' ? 'Sim' : 'Não'}
+                      </Badge>
+                      {data.data_opcao_simples && (
+                        <p className="text-sm text-zinc-600 mt-1">
+                          Desde: {formatDate(data.data_opcao_simples)}
+                        </p>
+                      )}
+                    </div>
+                  )}
+                  {data.opcao_mei && (
+                    <div>
+                      <span className="font-semibold text-zinc-700">Optante pelo MEI:</span>
+                      <Badge variant={data.opcao_mei === 'S' ? 'default' : 'secondary'} className="ml-2">
+                        {data.opcao_mei === 'S' ? 'Sim' : 'Não'}
+                      </Badge>
+                      {data.data_opcao_mei && (
+                        <p className="text-sm text-zinc-600 mt-1">
+                          Desde: {formatDate(data.data_opcao_mei)}
+                        </p>
+                      )}
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
             )}
-            
-            {data._api_info && (
-              <div style={{ 
-                marginTop: '1.5rem',
-                padding: '0.75rem',
-                backgroundColor: '#f0f9ff',
-                border: '1px solid #bae6fd',
-                borderRadius: '6px',
-                fontSize: '0.875rem',
-                color: '#0c4a6e'
-              }}>
-                <strong>Fonte:</strong> {data._api_info.fonte}<br />
-                <strong>Consultado em:</strong> {new Date(data._api_info.timestamp).toLocaleString('pt-BR')}
-              </div>
+
+            {/* BLOCO 7 - QUADRO SOCIETÁRIO */}
+            {data.quadro_societario && data.quadro_societario.length > 0 && (
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Users className="w-5 h-5" />
+                    Quadro Societário (QSA)
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Nome</TableHead>
+                        <TableHead>Documento</TableHead>
+                        <TableHead>Tipo</TableHead>
+                        <TableHead>Qualificação</TableHead>
+                        <TableHead>Data Entrada</TableHead>
+                        <TableHead>Faixa Etária</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {data.quadro_societario.map((socio, index) => (
+                        <TableRow key={index}>
+                          <TableCell className="font-medium">{socio.nome}</TableCell>
+                          <TableCell>{maskDocument(socio.documento)}</TableCell>
+                          <TableCell>
+                            <Badge variant={socio.tipo === 'PJ' ? 'default' : 'secondary'}>
+                              {socio.tipo}
+                            </Badge>
+                          </TableCell>
+                          <TableCell>{socio.qualificacao}</TableCell>
+                          <TableCell>{formatDate(socio.data_entrada)}</TableCell>
+                          <TableCell>{socio.faixa_etaria}</TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </CardContent>
+              </Card>
+            )}
+
+            {/* BLOCO DE AVISOS */}
+            {data._avisos && (data._avisos.titulo || data._avisos.mensagem) && (
+              <Alert>
+                <AlertCircle className="h-4 w-4" />
+                <AlertDescription>
+                  {data._avisos.titulo && <strong>{data._avisos.titulo}</strong>}
+                  {data._avisos.mensagem && <p className="mt-1">{data._avisos.mensagem}</p>}
+                </AlertDescription>
+              </Alert>
             )}
           </div>
         )}
