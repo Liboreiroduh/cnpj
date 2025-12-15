@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev -p 3000",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p ${PORT:-3000}",
+    "start:render": "node start-render.js",
     "lint": "next lint",
     "db:push": "prisma db push",
     "db:generate": "prisma generate",

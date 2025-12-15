@@ -515,3 +515,22 @@ Syntax error: tailwindcss: /home/z/my-project/src/app/globals.css Cannot apply u
 
  ✓ Starting...
  ✓ Ready in 1730ms
+ ⚠ Found a change in next.config.ts. Restarting the server to apply the changes...
+   ▲ Next.js 15.3.5
+   - Local:        http://localhost:3000
+   - Network:      http://21.0.5.131:3000
+   - Environments: .env
+
+ ✓ Starting...
+ ⚠ Invalid next.config.ts options detected: 
+ ⚠     Unrecognized key(s) in object: 'port', 'hostname'
+ ⚠ See more info here: https://nextjs.org/docs/messages/invalid-next-config
+ ✓ Ready in 1712ms
+ ⚠ Found a change in next.config.ts. Restarting the server to apply the changes...
+   ▲ Next.js 15.3.5
+   - Local:        http://localhost:3000
+   - Network:      http://21.0.5.131:3000
+   - Environments: .env
+
+ ✓ Starting...
+ ✓ Ready in 1743ms
