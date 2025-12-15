@@ -138,6 +138,13 @@ export async function GET(request: NextRequest) {
       );
     }
     
+    if (response.status === 429) {
+      return NextResponse.json(
+        { error: 'Limite de consultas excedido. Por favor, aguarde alguns minutos antes de tentar novamente.' },
+        { status: 429 }
+      );
+    }
+    
     return NextResponse.json(
       { error: `Erro na consulta: Status ${response.status}` },
       { status: response.status }
