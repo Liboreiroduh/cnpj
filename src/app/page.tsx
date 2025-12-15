@@ -43,14 +43,15 @@ export default function ConsultaCNPJ() {
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let value = e.target.value;
+    const value = e.target.value;
     const cleaned = value.replace(/\D/g, '');
     
+    // Formata enquanto digita, mas permite qualquer formato
     if (cleaned.length > 0) {
-      value = formatCNPJ(cleaned);
+      setCnpjInput(formatCNPJ(cleaned));
+    } else {
+      setCnpjInput(value);
     }
-    
-    setCnpjInput(value);
   };
 
   const clearInput = () => {
@@ -60,10 +61,15 @@ export default function ConsultaCNPJ() {
   };
 
   const handleSearch = async () => {
+    // Pega apenas os números do input
     const cleanedCnpj = cnpjInput.replace(/\D/g, '');
     
+    console.log('Input original:', cnpjInput);
+    console.log('CNPJ limpo:', cleanedCnpj);
+    console.log('Tamanho:', cleanedCnpj.length);
+    
     if (cleanedCnpj.length !== 14) {
-      setError('CNPJ inválido. Deve conter 14 dígitos.');
+      setError(`CNPJ inválido. Tem ${cleanedCnpj.length} dígitos, precisa de 14.`);
       return;
     }
 
@@ -98,6 +104,10 @@ export default function ConsultaCNPJ() {
       handleSearch();
     }
   };
+
+  // Verifica se tem 14 números para habilitar o botão
+  const cleanedCnpj = cnpjInput.replace(/\D/g, '');
+  const canSearch = cleanedCnpj.length === 14 && !loading;
 
   const formatCurrency = (value?: number) => {
     if (!value) return 'Não informado';
@@ -152,7 +162,7 @@ export default function ConsultaCNPJ() {
           <div style={{ marginBottom: '1rem' }}>
             <input
               type="text"
-              placeholder="Digite o CNPJ: 45259906000163"
+              placeholder="Digite o CNPJ: 45.259.906/0001-63"
               value={cnpjInput}
               onChange={handleInputChange}
               onKeyPress={handleKeyPress}
@@ -166,22 +176,31 @@ export default function ConsultaCNPJ() {
               }}
               maxLength={18}
             />
+            <div style={{ fontSize: '0.875rem', marginBottom: '0.5rem' }}>
+              Dígitos: {cleanedCnpj.length}/14 
+              {cleanedCnpj.length === 14 && (
+                <span style={{ color: '#16a34a', fontWeight: 'bold' }}> ✅ CNPJ válido!</span>
+              )}
+              {cleanedCnpj.length > 0 && cleanedCnpj.length < 14 && (
+                <span style={{ color: '#dc2626' }}> ❌ Faltam {14 - cleanedCnpj.length} dígitos</span>
+              )}
+            </div>
           </div>
           
           <div style={{ display: 'flex', gap: '0.75rem', marginBottom: '1rem' }}>
             <button 
               onClick={handleSearch} 
-              disabled={loading || cnpjInput.replace(/\D/g, '').length !== 14}
+              disabled={!canSearch}
               style={{ 
                 flex: 1,
                 padding: '0.75rem',
-                backgroundColor: (loading || cnpjInput.replace(/\D/g, '').length !== 14) ? '#9ca3af' : '#3b82f6',
+                backgroundColor: canSearch ? '#3b82f6' : '#9ca3af',
                 color: 'white',
                 border: 'none',
                 borderRadius: '6px',
                 fontSize: '1rem',
                 fontWeight: 'bold',
-                cursor: (loading || cnpjInput.replace(/\D/g, '').length !== 14) ? 'not-allowed' : 'pointer'
+                cursor: canSearch ? 'pointer' : 'not-allowed'
               }}
             >
               {loading ? 'Consultando...' : 'Consultar CNPJ'}
@@ -205,11 +224,11 @@ export default function ConsultaCNPJ() {
             </button>
           </div>
           
-          <div style={{ fontSize: '0.875rem', color: '#64748b' }}>
-            Digite apenas os 14 números do CNPJ. O sistema formatará automaticamente.
+          <div style={{ fontSize: '0.875rem', color: '#64748b', marginBottom: '0.5rem' }}>
+            Digite o CNPJ em qualquer formato. O sistema vai formatar e validar automaticamente.
           </div>
-          <div style={{ fontSize: '0.75rem', color: '#94a3b8', marginTop: '0.5rem' }}>
-            <strong>Teste:</strong> 45259906000163 | 23246139000115 | 04259026000110
+          <div style={{ fontSize: '0.75rem', color: '#94a3b8' }}>
+            <strong>Teste:</strong> 45259906000163 | 45.259.906/0001-63 | 23246139000115
           </div>
         </div>
 
