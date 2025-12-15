@@ -708,3 +708,29 @@ Syntax error: tailwindcss: /home/z/my-project/src/app/globals.css Cannot apply u
 <w> [webpack.cache.PackFileCacheStrategy] Skipped not serializable cache item 'Compilation/modules|/home/z/my-project/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[2]!/home/z/my-project/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[3]!/home/z/my-project/src/app/globals.css': No serializer registered for PostCSSSyntaxError
 <w> while serializing webpack/lib/cache/PackFileCacheStrategy.PackContentItems -> webpack/lib/NormalModule -> webpack/lib/ModuleBuildError -> PostCSSSyntaxError
  ✓ Compiled in 450ms (738 modules)
+ GET / 200 in 209ms
+ ✓ Compiled /api/cnpj-multi in 451ms (404 modules)
+Tentando API: CNPJ.ws (pública) - https://publica.cnpj.ws/cnpj/45259906000163
+✅ Sucesso com CNPJ.ws (pública): {"cnpj_raiz":"45259906","razao_social":"MOC IMPERMEABILIZANTES COMERCIO LTDA","capital_social":"40000.00","responsavel_federativo":"","atualizado_em":"2025-12-13T03:00:00.000Z","porte":{"id":"01","des
+ GET /api/cnpj-multi?cnpj=45259906000163 200 in 837ms
+Tentando API: CNPJ.ws (pública) - https://publica.cnpj.ws/cnpj/45259906000163
+✅ Sucesso com CNPJ.ws (pública): {"cnpj_raiz":"45259906","razao_social":"MOC IMPERMEABILIZANTES COMERCIO LTDA","capital_social":"40000.00","responsavel_federativo":"","atualizado_em":"2025-12-13T03:00:00.000Z","porte":{"id":"01","des
+ GET /api/cnpj-multi?cnpj=45259906000163 200 in 293ms
+Tentando API: CNPJ.ws (pública) - https://publica.cnpj.ws/cnpj/23246139000115
+✅ Sucesso com CNPJ.ws (pública): {"cnpj_raiz":"23246139","razao_social":"MACHINE LTDA","capital_social":"100000.00","responsavel_federativo":"","atualizado_em":"2025-12-13T03:00:00.000Z","porte":{"id":"01","descricao":"Micro Empresa"
+ GET /api/cnpj-multi?cnpj=23246139000115 200 in 753ms
+Tentando API: CNPJ.ws (pública) - https://publica.cnpj.ws/cnpj/23246139000115
+✅ Sucesso com CNPJ.ws (pública): {"cnpj_raiz":"23246139","razao_social":"MACHINE LTDA","capital_social":"100000.00","responsavel_federativo":"","atualizado_em":"2025-12-13T03:00:00.000Z","porte":{"id":"01","descricao":"Micro Empresa"
+ GET /api/cnpj-multi?cnpj=23246139000115 200 in 281ms
+Tentando API: CNPJ.ws (pública) - https://publica.cnpj.ws/cnpj/23246139000115
+⏱️ Rate limit em CNPJ.ws (pública), tentando próxima...
+Tentando API: MinhaReceita - https://minhareceita.org/23246139000115
+✅ Sucesso com MinhaReceita: {"uf":"MG","cep":"39400215","qsa":[{"pais":null,"nome_socio":"JOSE TADEU PEREIRA","codigo_pais":null,"faixa_etaria":"Entre 41 a 50 anos","cnpj_cpf_do_socio":"***672966**","qualificacao_socio":"Sócio-A
+💥 Falha ao conectar com MinhaReceita: TypeError: data.capital_social?.replace is not a function. (In 'data.capital_social?.replace(',', '.')', 'data.capital_social?.replace' is undefined)
+    at GET (webpack-internal:///(rsc)/./src/app/api/cnpj-multi/route.ts:94:76)
+    at processTicksAndRejections (null)
+Tentando API: OpenCNPJ - https://api.opencnpj.org/cnpj/23246139000115
+❌ Erro 403 em OpenCNPJ
+Tentando API: ReceitaWS (backup) - https://receitaws.com.br/v1/cnpj/23246139000115
+✅ Sucesso com ReceitaWS (backup): {"abertura":"10/09/2015","situacao":"ATIVA","tipo":"MATRIZ","nome":"MACHINE LTDA","fantasia":"MACHINE LED","porte":"MICRO EMPRESA","natureza_juridica":"206-2 - Sociedade Empresária Limitada","atividad
+ GET /api/cnpj-multi?cnpj=23246139000115 200 in 1788ms
