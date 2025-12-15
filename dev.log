@@ -346,3 +346,136 @@ Syntax error: tailwindcss: /home/z/my-project/src/app/globals.css Cannot apply u
  GET /_next/static/chunks/fallback/pages/_app.js 500 in 1198ms
  GET /_next/static/chunks/fallback/pages/_error.js 500 in 1195ms
  GET /_next/static/chunks/fallback/react-refresh.js 500 in 1197ms
+Error: Cannot apply unknown utility class `bg-background`
+    at processTicksAndRejections (null)
+ ⨯ ./src/app/globals.css:1:1
+Syntax error: tailwindcss: /home/z/my-project/src/app/globals.css Cannot apply unknown utility class `bg-background`
+
+> 1 | @import "tailwindcss";
+    | ^
+  2 | @import "tw-animate-css";
+  3 |
+ GET / 500 in 350ms
+Error: Cannot apply unknown utility class `bg-background`
+    at processTicksAndRejections (null)
+ ⨯ ./src/app/globals.css:1:1
+Syntax error: tailwindcss: /home/z/my-project/src/app/globals.css Cannot apply unknown utility class `bg-background`
+
+> 1 | @import "tailwindcss";
+    | ^
+  2 | @import "tw-animate-css";
+  3 |
+ GET /_next/static/chunks/fallback/main.js 500 in 1099ms
+ GET /_next/static/chunks/fallback/webpack.js 500 in 1088ms
+ ✓ Compiled /_not-found in 763ms (1115 modules)
+ GET /_next/static/chunks/fallback/react-refresh.js 404 in 931ms
+ GET /_next/static/chunks/fallback/pages/_app.js 404 in 1290ms
+ GET /_next/static/chunks/fallback/pages/_error.js 404 in 1656ms
+ ⨯ Error: ENOENT: no such file or directory, open '/home/z/my-project/.next/server/app-paths-manifest.json'
+    at readFileSync (null)
+    at processTicksAndRejections (null) {
+  code: 'ENOENT',
+  path: '/home/z/my-project/.next/server/app-paths-manifest.json',
+  syscall: 'open',
+  errno: -2
+}
+ GET / 500 in 407ms
+ ⨯ Error: ENOENT: no such file or directory, open '/home/z/my-project/.next/server/app-paths-manifest.json'
+    at readFileSync (null)
+    at processTicksAndRejections (null) {
+  code: 'ENOENT',
+  path: '/home/z/my-project/.next/server/app-paths-manifest.json',
+  syscall: 'open',
+  errno: -2
+}
+ GET /_next/static/chunks/fallback/webpack.js 500 in 372ms
+ ⨯ Error: ENOENT: no such file or directory, open '/home/z/my-project/.next/server/app-paths-manifest.json'
+    at readFileSync (null)
+    at processTicksAndRejections (null) {
+  code: 'ENOENT',
+  path: '/home/z/my-project/.next/server/app-paths-manifest.json',
+  syscall: 'open',
+  errno: -2
+}
+ ⨯ Error: ENOENT: no such file or directory, open '/home/z/my-project/.next/server/app-paths-manifest.json'
+    at readFileSync (null)
+    at processTicksAndRejections (null) {
+  code: 'ENOENT',
+  path: '/home/z/my-project/.next/server/app-paths-manifest.json',
+  syscall: 'open',
+  errno: -2
+}
+ ⨯ Error: ENOENT: no such file or directory, open '/home/z/my-project/.next/server/app-paths-manifest.json'
+    at readFileSync (null)
+    at processTicksAndRejections (null) {
+  code: 'ENOENT',
+  path: '/home/z/my-project/.next/server/app-paths-manifest.json',
+  syscall: 'open',
+  errno: -2
+}
+ GET /_next/static/chunks/fallback/main.js 500 in 1085ms
+ GET /_next/static/chunks/fallback/react-refresh.js 500 in 1084ms
+ GET /_next/static/chunks/fallback/pages/_app.js 500 in 1084ms
+ ⨯ Error: ENOENT: no such file or directory, open '/home/z/my-project/.next/server/app-paths-manifest.json'
+    at readFileSync (null)
+    at processTicksAndRejections (null) {
+  code: 'ENOENT',
+  path: '/home/z/my-project/.next/server/app-paths-manifest.json',
+  syscall: 'open',
+  errno: -2
+}
+ GET /_next/static/chunks/fallback/pages/_error.js 500 in 371ms
+ ⨯ Error: ENOENT: no such file or directory, open '/home/z/my-project/.next/server/app-paths-manifest.json'
+    at readFileSync (null)
+    at processTicksAndRejections (null) {
+  code: 'ENOENT',
+  path: '/home/z/my-project/.next/server/app-paths-manifest.json',
+  syscall: 'open',
+  errno: -2
+}
+ GET / 500 in 787ms
+ ⨯ Error: ENOENT: no such file or directory, open '/home/z/my-project/.next/server/app-paths-manifest.json'
+    at readFileSync (null)
+    at processTicksAndRejections (null) {
+  code: 'ENOENT',
+  path: '/home/z/my-project/.next/server/app-paths-manifest.json',
+  syscall: 'open',
+  errno: -2
+}
+ GET /_next/static/chunks/fallback/webpack.js 500 in 368ms
+ ⨯ Error: ENOENT: no such file or directory, open '/home/z/my-project/.next/server/app-paths-manifest.json'
+    at readFileSync (null)
+    at processTicksAndRejections (null) {
+  code: 'ENOENT',
+  path: '/home/z/my-project/.next/server/app-paths-manifest.json',
+  syscall: 'open',
+  errno: -2
+}
+ GET /_next/static/chunks/fallback/react-refresh.js 500 in 373ms
+ ⨯ Error: ENOENT: no such file or directory, open '/home/z/my-project/.next/server/app-paths-manifest.json'
+    at readFileSync (null)
+    at processTicksAndRejections (null) {
+  code: 'ENOENT',
+  path: '/home/z/my-project/.next/server/app-paths-manifest.json',
+  syscall: 'open',
+  errno: -2
+}
+ ⨯ Error: ENOENT: no such file or directory, open '/home/z/my-project/.next/server/app-paths-manifest.json'
+    at readFileSync (null)
+    at processTicksAndRejections (null) {
+  code: 'ENOENT',
+  path: '/home/z/my-project/.next/server/app-paths-manifest.json',
+  syscall: 'open',
+  errno: -2
+}
+ GET /_next/static/chunks/fallback/pages/_app.js 500 in 807ms
+ GET /_next/static/chunks/fallback/main.js 500 in 807ms
+ GET /_next/static/chunks/fallback/pages/_error.js 404 in 107ms
+ ⨯ error: Cannot find module './447.js' from '/home/z/my-project/.next/server/webpack-runtime.js'
+ ⨯ error: Cannot find module './548.js' from '/home/z/my-project/.next/server/webpack-runtime.js'
+ GET / 500 in 375ms
+ GET /_next/static/chunks/fallback/main.js 404 in 113ms
+ GET /_next/static/chunks/fallback/webpack.js 404 in 407ms
+ GET /_next/static/chunks/fallback/pages/_app.js 404 in 105ms
+ GET /_next/static/chunks/fallback/react-refresh.js 404 in 448ms
+ GET /_next/static/chunks/fallback/pages/_error.js 404 in 786ms
