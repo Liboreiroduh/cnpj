@@ -534,3 +534,53 @@ Syntax error: tailwindcss: /home/z/my-project/src/app/globals.css Cannot apply u
 
  ✓ Starting...
  ✓ Ready in 1743ms
+ ○ Compiling / ...
+ ✓ Compiled / in 6s (796 modules)
+ GET / 200 in 6498ms
+ ○ Compiling /api/cnpj-multi ...
+ ✓ Compiled /api/cnpj-multi in 887ms (806 modules)
+Tentando API: CNPJ.ws (pública) - https://publica.cnpj.ws/cnpj/45259906000163
+ GET / 200 in 346ms
+✅ Sucesso com CNPJ.ws (pública): {"cnpj_raiz":"45259906","razao_social":"MOC IMPERMEABILIZANTES COMERCIO LTDA","capital_social":"40000.00","responsavel_federativo":"","atualizado_em":"2025-12-13T03:00:00.000Z","porte":{"id":"01","des
+ GET /api/cnpj-multi?cnpj=45259906000163 200 in 1853ms
+ GET / 200 in 126ms
+Tentando API: CNPJ.ws (pública) - https://publica.cnpj.ws/cnpj/45259906000163
+✅ Sucesso com CNPJ.ws (pública): {"cnpj_raiz":"45259906","razao_social":"MOC IMPERMEABILIZANTES COMERCIO LTDA","capital_social":"40000.00","responsavel_federativo":"","atualizado_em":"2025-12-13T03:00:00.000Z","porte":{"id":"01","des
+ GET /api/cnpj-multi?cnpj=45259906000163 200 in 314ms
+Tentando API: CNPJ.ws (pública) - https://publica.cnpj.ws/cnpj/45259906000163
+✅ Sucesso com CNPJ.ws (pública): {"cnpj_raiz":"45259906","razao_social":"MOC IMPERMEABILIZANTES COMERCIO LTDA","capital_social":"40000.00","responsavel_federativo":"","atualizado_em":"2025-12-13T03:00:00.000Z","porte":{"id":"01","des
+ GET /api/cnpj-multi?cnpj=45259906000163 200 in 1614ms
+Tentando API: CNPJ.ws (pública) - https://publica.cnpj.ws/cnpj/45259906000163
+✅ Sucesso com CNPJ.ws (pública): {"cnpj_raiz":"45259906","razao_social":"MOC IMPERMEABILIZANTES COMERCIO LTDA","capital_social":"40000.00","responsavel_federativo":"","atualizado_em":"2025-12-13T03:00:00.000Z","porte":{"id":"01","des
+ GET /api/cnpj-multi?cnpj=45259906000163 200 in 295ms
+Tentando API: CNPJ.ws (pública) - https://publica.cnpj.ws/cnpj/45259906000163
+✅ Sucesso com CNPJ.ws (pública): {"cnpj_raiz":"45259906","razao_social":"MOC IMPERMEABILIZANTES COMERCIO LTDA","capital_social":"40000.00","responsavel_federativo":"","atualizado_em":"2025-12-13T03:00:00.000Z","porte":{"id":"01","des
+ GET /api/cnpj-multi?cnpj=45259906000163 200 in 291ms
+ GET / 200 in 65ms
+Tentando API: CNPJ.ws (pública) - https://publica.cnpj.ws/cnpj/45259906000163
+⏱️ Rate limit em CNPJ.ws (pública), tentando próxima...
+Tentando API: MinhaReceita - https://minhareceita.org/45259906000163
+✅ Sucesso com MinhaReceita: {"uf":"MG","cep":"39402604","qsa":[{"pais":null,"nome_socio":"ELTON MARQUES DE ALMEIDA JUNIOR","codigo_pais":null,"faixa_etaria":"Entre 31 a 40 anos","cnpj_cpf_do_socio":"***385646**","qualificacao_so
+💥 Falha ao conectar com MinhaReceita: TypeError: data.capital_social?.replace is not a function. (In 'data.capital_social?.replace(',', '.')', 'data.capital_social?.replace' is undefined)
+    at GET (webpack-internal:///(rsc)/./src/app/api/cnpj-multi/route.ts:94:76)
+    at processTicksAndRejections (null)
+Tentando API: OpenCNPJ - https://api.opencnpj.org/cnpj/45259906000163
+❌ Erro 403 em OpenCNPJ
+Tentando API: ReceitaWS (backup) - https://receitaws.com.br/v1/cnpj/45259906000163
+✅ Sucesso com ReceitaWS (backup): {"abertura":"11/02/2022","situacao":"ATIVA","tipo":"MATRIZ","nome":"MOC IMPERMEABILIZANTES COMERCIO LTDA","fantasia":"MOC IMPERMEABILIZANTES","porte":"MICRO EMPRESA","natureza_juridica":"206-2 - Socie
+ GET /api/cnpj-multi?cnpj=45259906000163 200 in 2391ms
+ GET / 200 in 58ms
+ ✓ Compiled in 464ms (806 modules)
+ GET / 200 in 87ms
+Tentando API: CNPJ.ws (pública) - https://publica.cnpj.ws/cnpj/45259906000163
+⏱️ Rate limit em CNPJ.ws (pública), tentando próxima...
+Tentando API: MinhaReceita - https://minhareceita.org/45259906000163
+✅ Sucesso com MinhaReceita: {"uf":"MG","cep":"39402604","qsa":[{"pais":null,"nome_socio":"ELTON MARQUES DE ALMEIDA JUNIOR","codigo_pais":null,"faixa_etaria":"Entre 31 a 40 anos","cnpj_cpf_do_socio":"***385646**","qualificacao_so
+💥 Falha ao conectar com MinhaReceita: TypeError: data.capital_social?.replace is not a function. (In 'data.capital_social?.replace(',', '.')', 'data.capital_social?.replace' is undefined)
+    at GET (webpack-internal:///(rsc)/./src/app/api/cnpj-multi/route.ts:94:76)
+    at processTicksAndRejections (null)
+Tentando API: OpenCNPJ - https://api.opencnpj.org/cnpj/45259906000163
+❌ Erro 403 em OpenCNPJ
+Tentando API: ReceitaWS (backup) - https://receitaws.com.br/v1/cnpj/45259906000163
+✅ Sucesso com ReceitaWS (backup): {"abertura":"11/02/2022","situacao":"ATIVA","tipo":"MATRIZ","nome":"MOC IMPERMEABILIZANTES COMERCIO LTDA","fantasia":"MOC IMPERMEABILIZANTES","porte":"MICRO EMPRESA","natureza_juridica":"206-2 - Socie
+ GET /api/cnpj-multi?cnpj=45259906000163 200 in 1029ms

@@ -181,6 +181,20 @@ export async function GET(request: NextRequest) {
               });
             }
             
+            // API ReceitaWS - CAMPO ESPECÍFICO
+            if (data.telefone) {
+              const tel = data.telefone.toString();
+              // Formato: "(38) 9856-6015"
+              const cleanedTel = tel.replace(/\D/g, '');
+              if (cleanedTel.length >= 10) {
+                telefonesArray.push({
+                  ddd: cleanedTel.substring(0, 2),
+                  numero: cleanedTel.substring(2),
+                  is_fax: false
+                });
+              }
+            }
+            
             // Formato alternativo (telefone junto com DDD)
             if (data.telefone1 && !data.ddd1) {
               const tel = data.telefone1.toString();
