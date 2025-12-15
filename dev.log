@@ -763,3 +763,16 @@ Tentando API: CNPJ.ws (pública) - COM CONTATOS - https://publica.cnpj.ws/cnpj/4
 ✅ Sucesso com CNPJ.ws (pública) - COM CONTATOS: {"cnpj_raiz":"45259906","razao_social":"MOC IMPERMEABILIZANTES COMERCIO LTDA","capital_social":"40000.00","responsavel_federativo":"","atualizado_em":"2025-12-13T03:00:00.000Z","porte":{"id":"01","des
 ✅ CNPJ.ws (pública) - COM CONTATOS TEM CONTATOS - Telefone: 98566015, Email: almeidajunior.moc@gmail.com
  GET /api/cnpj-multi?cnpj=45259906000163 200 in 918ms
+ ⨯ error: Cannot find module './447.js' from '/home/z/my-project/.next/server/webpack-runtime.js'
+ ○ Compiling /_error ...
+ ✓ Compiled /_error in 2.6s (1076 modules)
+ GET / 500 in 3382ms
+ ✓ Compiled in 541ms (1072 modules)
+ ⨯ error: ENOENT reading "/home/z/my-project/.next/server/vendor-chunks/lucide-react.js"
+ GET / 500 in 792ms
+ ✓ Compiled /api/cnpj-multi in 252ms (491 modules)
+Tentando API: CNPJ.ws (pública) - https://publica.cnpj.ws/cnpj/35621926000189
+✅ Sucesso com CNPJ.ws (pública)
+✅ CNPJ.ws (pública) TEM CONTATOS - Telefone: true, Email: true
+📋 Dados mapeados - Telefone: 1, Email: Sim
+ GET /api/cnpj-multi?cnpj=35621926000189 200 in 1223ms
