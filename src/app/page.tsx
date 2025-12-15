@@ -313,7 +313,7 @@ export default function ConsultaCNPJMulti() {
 
         {/* Mensagens de Erro */}
         {error && (
-          <Alert variant={error.includes('Limite de consultas') || error.includes('Todas as APIs') ? 'default' : 'destructive'}>
+          <Alert variant={error.includes('Limite de consultas') || error.includes('Todas as APIs') || error.includes('contatos') ? 'default' : 'destructive'}>
             <AlertCircle className="h-4 w-4" />
             <AlertDescription>
               {error}
@@ -326,6 +326,14 @@ export default function ConsultaCNPJMulti() {
               {error.includes('Todas as APIs') && (
                 <div className="mt-2 text-sm">
                   🌐 <strong>Alternativas:</strong> Tente novamente mais tarde ou use outras fontes de dados.
+                </div>
+              )}
+              {error.includes('contatos') && (
+                <div className="mt-2 text-sm">
+                  ⏱️ <strong>Aguarde:</strong> Limite de consultas atingido. 
+                  <div className="font-semibold text-blue-600 mt-1">
+                    Tente novamente em 2-3 minutos.
+                  </div>
                 </div>
               )}
             </AlertDescription>

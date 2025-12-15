@@ -755,3 +755,11 @@ Tentando API: CNPJ.ws (pública) - MELHOR CONTATOS - https://publica.cnpj.ws/cnp
   "emails encontrados": [ "almeidajunior.moc@gmail.com" ],
 }
  GET /api/cnpj-multi?cnpj=45259906000163 200 in 2482ms
+ ✓ Compiled in 452ms (738 modules)
+ ✓ Compiled in 213ms (352 modules)
+ ✓ Compiled in 763ms (738 modules)
+ ✓ Compiled /api/cnpj-multi in 200ms (404 modules)
+Tentando API: CNPJ.ws (pública) - COM CONTATOS - https://publica.cnpj.ws/cnpj/45259906000163
+✅ Sucesso com CNPJ.ws (pública) - COM CONTATOS: {"cnpj_raiz":"45259906","razao_social":"MOC IMPERMEABILIZANTES COMERCIO LTDA","capital_social":"40000.00","responsavel_federativo":"","atualizado_em":"2025-12-13T03:00:00.000Z","porte":{"id":"01","des
+✅ CNPJ.ws (pública) - COM CONTATOS TEM CONTATOS - Telefone: 98566015, Email: almeidajunior.moc@gmail.com
+ GET /api/cnpj-multi?cnpj=45259906000163 200 in 918ms
