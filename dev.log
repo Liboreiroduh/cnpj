@@ -584,3 +584,127 @@ Tentando API: OpenCNPJ - https://api.opencnpj.org/cnpj/45259906000163
 Tentando API: ReceitaWS (backup) - https://receitaws.com.br/v1/cnpj/45259906000163
 ✅ Sucesso com ReceitaWS (backup): {"abertura":"11/02/2022","situacao":"ATIVA","tipo":"MATRIZ","nome":"MOC IMPERMEABILIZANTES COMERCIO LTDA","fantasia":"MOC IMPERMEABILIZANTES","porte":"MICRO EMPRESA","natureza_juridica":"206-2 - Socie
  GET /api/cnpj-multi?cnpj=45259906000163 200 in 1029ms
+ GET / 200 in 107ms
+ ✓ Compiled /_not-found in 461ms (778 modules)
+ GET /_next/static/chunks/webpack.js?v=1765835436483 404 in 565ms
+ GET /_next/static/css/app/layout.css?v=1765835436483 404 in 848ms
+ GET /_next/static/chunks/main-app.js?v=1765835436483 404 in 62ms
+ GET /_next/static/chunks/app-pages-internals.js 404 in 296ms
+ GET /_next/static/chunks/app/layout.js 404 in 45ms
+ GET /_next/static/chunks/app/page.js 404 in 61ms
+ GET / 200 in 78ms
+ GET /_next/static/css/app/layout.css?v=1765835440539 404 in 299ms
+ GET /_next/static/chunks/main-app.js?v=1765835440539 404 in 121ms
+ GET /_next/static/chunks/app-pages-internals.js 404 in 341ms
+ GET /_next/static/chunks/app/page.js 404 in 579ms
+ GET /_next/static/chunks/app/layout.js 404 in 841ms
+ GET / 200 in 63ms
+ GET /_next/static/css/app/layout.css?v=1765835480292 404 in 49ms
+ GET /_next/static/chunks/main-app.js?v=1765835480292 404 in 52ms
+ GET /_next/static/chunks/app/page.js 404 in 71ms
+ GET /_next/static/chunks/app-pages-internals.js 404 in 295ms
+ GET /_next/static/chunks/app/layout.js 404 in 509ms
+[Error: ENOENT: no such file or directory, statx '/home/z/my-project/.next/cache/webpack/client-development/3.pack.gz'] {
+  code: 'ENOENT',
+  path: '/home/z/my-project/.next/cache/webpack/client-development/3.pack.gz',
+  syscall: 'statx',
+  errno: -2
+}
+ ⨯ unhandledRejection: [Error: ENOENT: no such file or directory, statx '/home/z/my-project/.next/cache/webpack/client-development/3.pack.gz'] {
+  code: 'ENOENT',
+  path: '/home/z/my-project/.next/cache/webpack/client-development/3.pack.gz',
+  syscall: 'statx',
+  errno: -2
+}
+ ⨯ unhandledRejection:  [Error: ENOENT: no such file or directory, statx '/home/z/my-project/.next/cache/webpack/client-development/3.pack.gz'] {
+  code: 'ENOENT',
+  path: '/home/z/my-project/.next/cache/webpack/client-development/3.pack.gz',
+  syscall: 'statx',
+  errno: -2
+}
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, statx '/home/z/my-project/.next/cache/webpack/client-development/3.pack.gz'
+[Error: ENOENT: no such file or directory, statx '/home/z/my-project/.next/cache/webpack/server-development/0.pack.gz'] {
+  code: 'ENOENT',
+  path: '/home/z/my-project/.next/cache/webpack/server-development/0.pack.gz',
+  syscall: 'statx',
+  errno: -2
+}
+ ⨯ unhandledRejection: [Error: ENOENT: no such file or directory, statx '/home/z/my-project/.next/cache/webpack/server-development/0.pack.gz'] {
+  code: 'ENOENT',
+  path: '/home/z/my-project/.next/cache/webpack/server-development/0.pack.gz',
+  syscall: 'statx',
+  errno: -2
+}
+ ⨯ unhandledRejection:  [Error: ENOENT: no such file or directory, statx '/home/z/my-project/.next/cache/webpack/server-development/0.pack.gz'] {
+  code: 'ENOENT',
+  path: '/home/z/my-project/.next/cache/webpack/server-development/0.pack.gz',
+  syscall: 'statx',
+  errno: -2
+}
+[Error: ENOENT: no such file or directory, statx '/home/z/my-project/.next/cache/webpack/server-development/1.pack.gz'] {
+  code: 'ENOENT',
+  path: '/home/z/my-project/.next/cache/webpack/server-development/1.pack.gz',
+  syscall: 'statx',
+  errno: -2
+}
+ ⨯ unhandledRejection: [Error: ENOENT: no such file or directory, statx '/home/z/my-project/.next/cache/webpack/server-development/1.pack.gz'] {
+  code: 'ENOENT',
+  path: '/home/z/my-project/.next/cache/webpack/server-development/1.pack.gz',
+  syscall: 'statx',
+  errno: -2
+}
+ ⨯ unhandledRejection:  [Error: ENOENT: no such file or directory, statx '/home/z/my-project/.next/cache/webpack/server-development/1.pack.gz'] {
+  code: 'ENOENT',
+  path: '/home/z/my-project/.next/cache/webpack/server-development/1.pack.gz',
+  syscall: 'statx',
+  errno: -2
+}
+[Error: ENOENT: no such file or directory, statx '/home/z/my-project/.next/cache/webpack/server-development/2.pack.gz'] {
+  code: 'ENOENT',
+  path: '/home/z/my-project/.next/cache/webpack/server-development/2.pack.gz',
+  syscall: 'statx',
+  errno: -2
+}
+ ⨯ unhandledRejection: [Error: ENOENT: no such file or directory, statx '/home/z/my-project/.next/cache/webpack/server-development/2.pack.gz'] {
+  code: 'ENOENT',
+  path: '/home/z/my-project/.next/cache/webpack/server-development/2.pack.gz',
+  syscall: 'statx',
+  errno: -2
+}
+ ⨯ unhandledRejection:  [Error: ENOENT: no such file or directory, statx '/home/z/my-project/.next/cache/webpack/server-development/2.pack.gz'] {
+  code: 'ENOENT',
+  path: '/home/z/my-project/.next/cache/webpack/server-development/2.pack.gz',
+  syscall: 'statx',
+  errno: -2
+}
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, statx '/home/z/my-project/.next/cache/webpack/server-development/0.pack.gz'
+Error: Cannot apply unknown utility class `border-border`
+    at processTicksAndRejections (null)
+ ⨯ ./src/app/globals.css:1:1
+Syntax error: tailwindcss: /home/z/my-project/src/app/globals.css Cannot apply unknown utility class `border-border`
+
+> 1 | @import "tailwindcss";
+    | ^
+  2 | 
+  3 | :root {
+Error: Cannot apply unknown utility class `border-border`
+    at processTicksAndRejections (null)
+ ⨯ ./src/app/globals.css:1:1
+Syntax error: tailwindcss: /home/z/my-project/src/app/globals.css Cannot apply unknown utility class `border-border`
+
+> 1 | @import "tailwindcss";
+    | ^
+  2 | 
+  3 | :root {
+Error: Cannot apply unknown utility class `border-border`
+    at processTicksAndRejections (null)
+ ⨯ ./src/app/globals.css:1:1
+Syntax error: tailwindcss: /home/z/my-project/src/app/globals.css Cannot apply unknown utility class `border-border`
+
+> 1 | @import "tailwindcss";
+    | ^
+  2 | 
+  3 | :root {
+<w> [webpack.cache.PackFileCacheStrategy] Skipped not serializable cache item 'Compilation/modules|/home/z/my-project/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[2]!/home/z/my-project/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[3]!/home/z/my-project/src/app/globals.css': No serializer registered for PostCSSSyntaxError
+<w> while serializing webpack/lib/cache/PackFileCacheStrategy.PackContentItems -> webpack/lib/NormalModule -> webpack/lib/ModuleBuildError -> PostCSSSyntaxError
+ ✓ Compiled in 450ms (738 modules)
