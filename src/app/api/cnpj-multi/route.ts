@@ -83,81 +83,149 @@ export async function GET(request: NextRequest) {
           
           // Situação cadastral
           situacao_cadastral: {
-            situacao: data.situacao_cadastral || data.estabelecimento?.situacao_cadastral,
-            data_situacao: data.data_situacao_cadastral || data.estabelecimento?.data_situacao_cadastral,
-            motivo: data.motivo_situacao_cadastral || data.estabelecimento?.motivo_situacao_cadastral,
-            situacao_especial: data.situacao_especial || data.estabelecimento?.situacao_especial,
-            data_situacao_especial: data.data_situacao_especial || data.estabelecimento?.data_situacao_especial
+            situacao: data.situacao_cadastral || data.estabelecimento?.situacao_cadastral || data.descricao_situacao_cadastral,
+            data_situacao: data.data_situacao_cadastral || data.estabelecimento?.data_situacao_cadastral || data.data_situacao_cadastral,
+            motivo: data.motivo_situacao_cadastral || data.estabelecimento?.motivo_situacao_cadastral || data.descricao_motivo_situacao_cadastral,
+            situacao_especial: data.situacao_especial || data.estabelecimento?.situacao_especial || data.situacao_especial,
+            data_situacao_especial: data.data_situacao_especial || data.estabelecimento?.data_situacao_especial || data.data_situacao_especial
           },
           
           // Natureza jurídica e porte
           natureza_juridica: data.natureza_juridica || {
             descricao: data.natureza_juridica?.descricao || data.natureza_juridica
           },
-          porte: data.porte?.descricao || data.porte_empresa || data.porte,
+          porte: data.porte?.descricao || data.porte_empresa || data.porte || data.descricao_porte,
           
           // Capital social e datas
           capital_social: parseFloat(data.capital_social?.replace(',', '.') || data.capital_social || '0'),
           data_inicio_atividade: data.data_inicio_atividade || data.estabelecimento?.data_inicio_atividade,
-          matriz_filial: data.matriz_filial || data.estabelecimento?.tipo,
+          matriz_filial: data.matriz_filial || data.estabelecimento?.tipo || data.descricao_identificador_matriz_filial,
           
           // CNAEs
           cnae_principal: data.cnae_principal ? {
-            codigo: data.cnae_principal.codigo || data.cnae_principal,
-            descricao: data.cnae_principal.descricao || data.estabelecimento?.atividade_principal?.descricao
+            codigo: data.cnae_principal.codigo || data.cnae_principal || data.cnae_fiscal,
+            descricao: data.cnae_principal.descricao || data.estabelecimento?.atividade_principal?.descricao || data.cnae_fiscal_descricao
           } : data.estabelecimento?.atividade_principal ? {
-            codigo: data.estabelecimento.atividade_principal.subclasse,
+            codigo: data.estabelecimento.atividade_principal.subclasse || data.estabelecimento.atividade_principal.id,
             descricao: data.estabelecimento.atividade_principal.descricao
+          } : data.cnae_fiscal ? {
+            codigo: data.cnae_fiscal,
+            descricao: data.cnae_fiscal_descricao
           } : undefined,
           
           cnaes_secundarios: data.cnaes_secundarios || data.estabelecimento?.atividades_secundarias?.map((ativ: any) => ({
-            codigo: ativ.codigo || ativ.subclasse,
+            codigo: ativ.codigo || ativ.subclasse || ativ.id,
             descricao: ativ.descricao
-          })),
+          })) || data.cnaes_secundarios || [],
           
           // Endereço completo
           logradouro: data.logradouro || (data.estabelecimento?.tipo_logradouro ? 
             `${data.estabelecimento.tipo_logradouro} ${data.estabelecimento.logradouro}` : 
-            data.estabelecimento?.logradouro),
+            data.estabelecimento?.logradouro) || data.descricao_tipo_de_logradouro ? 
+            `${data.descricao_tipo_de_logradouro} ${data.logradouro}` : data.logradouro,
           numero: data.numero || data.estabelecimento?.numero,
           complemento: data.complemento || data.estabelecimento?.complemento,
           bairro: data.bairro || data.estabelecimento?.bairro,
-          municipio: data.municipio || data.estabelecimento?.cidade?.nome,
+          municipio: data.municipio || data.estabelecimento?.cidade?.nome || data.nome_municipio,
           uf: data.uf || data.estabelecimento?.estado?.sigla,
           cep: data.cep || data.estabelecimento?.cep,
-          codigo_ibge: data.estabelecimento?.cidade?.ibge_id?.toString(),
+          codigo_ibge: data.estabelecimento?.cidade?.ibge_id?.toString() || data.codigo_municipio_ibge?.toString(),
           
-          // Contatos
-          telefones: data.telefones || [
-            {
-              ddd: data.estabelecimento?.ddd1,
-              numero: data.estabelecimento?.telefone1,
-              is_fax: false
-            },
-            {
-              ddd: data.estabelecimento?.ddd2,
-              numero: data.estabelecimento?.telefone2,
-              is_fax: false
+          // CONTATOS - MAPEAMENTO COMPLETO
+          telefones: (() => {
+            const telefonesArray: Array<{ddd?: string, numero?: string, is_fax?: boolean}> = [];
+            
+            // API CNPJ.ws
+            if (data.estabelecimento?.ddd1 && data.estabelecimento?.telefone1) {
+              telefonesArray.push({
+                ddd: data.estabelecimento.ddd1,
+                numero: data.estabelecimento.telefone1,
+                is_fax: false
+              });
             }
-          ].filter(t => t.ddd && t.numero),
+            if (data.estabelecimento?.ddd2 && data.estabelecimento?.telefone2) {
+              telefonesArray.push({
+                ddd: data.estabelecimento.ddd2,
+                numero: data.estabelecimento.telefone2,
+                is_fax: false
+              });
+            }
+            if (data.estabelecimento?.ddd_fax && data.estabelecimento?.fax) {
+              telefonesArray.push({
+                ddd: data.estabelecimento.ddd_fax,
+                numero: data.estabelecimento.fax,
+                is_fax: true
+              });
+            }
+            
+            // API MinhaReceita
+            if (data.ddd_telefone_1 && data.telefone_1) {
+              telefonesArray.push({
+                ddd: data.ddd_telefone_1,
+                numero: data.telefone_1,
+                is_fax: false
+              });
+            }
+            if (data.ddd_telefone_2 && data.telefone_2) {
+              telefonesArray.push({
+                ddd: data.ddd_telefone_2,
+                numero: data.telefone_2,
+                is_fax: false
+              });
+            }
+            if (data.ddd_fax && data.fax) {
+              telefonesArray.push({
+                ddd: data.ddd_fax,
+                numero: data.fax,
+                is_fax: true
+              });
+            }
+            
+            // Formato alternativo (telefone junto com DDD)
+            if (data.telefone1 && !data.ddd1) {
+              const tel = data.telefone1.toString();
+              if (tel.length >= 10) {
+                telefonesArray.push({
+                  ddd: tel.substring(0, 2),
+                  numero: tel.substring(2),
+                  is_fax: false
+                });
+              }
+            }
+            
+            // API MinhaReceita formato DDD+Telefone junto
+            if (data.ddd_telefone_1 && !data.telefone_1) {
+              const tel = data.ddd_telefone_1.toString();
+              if (tel.length >= 10) {
+                telefonesArray.push({
+                  ddd: tel.substring(0, 2),
+                  numero: tel.substring(2),
+                  is_fax: false
+                });
+              }
+            }
+            
+            return telefonesArray.filter(t => t.ddd && t.numero);
+          })(),
           
-          email: data.email || data.estabelecimento?.email,
+          // EMAIL - MAPEAMENTO COMPLETO
+          email: data.email || data.estabelecimento?.email || data.email || null,
           
           // Informações fiscais
-          opcao_simples: data.opcao_simples || data.simples?.simples === 'Sim' ? 'S' : 'N',
-          data_opcao_simples: data.data_opcao_simples || data.simples?.data_opcao_simples,
-          opcao_mei: data.opcao_mei || data.simples?.mei === 'Sim' ? 'S' : 'N',
-          data_opcao_mei: data.data_opcao_mei || data.simples?.data_opcao_mei,
+          opcao_simples: data.opcao_simples || data.simples?.simples === 'Sim' || data.opcao_pelo_simples ? 'S' : 'N',
+          data_opcao_simples: data.data_opcao_simples || data.simples?.data_opcao_simples || data.data_opcao_pelo_simples,
+          opcao_mei: data.opcao_mei || data.simples?.mei === 'Sim' || data.opcao_pelo_mei ? 'S' : 'N',
+          data_opcao_mei: data.data_opcao_mei || data.simples?.data_opcao_mei || data.data_opcao_pelo_mei,
           
-          // Quadro societário (QSA)
-          quadro_societario: data.QSA || data.socios?.map((socio: any) => ({
+          // Quadro societário (QSA) - MAPEAMENTO COMPLETO
+          quadro_societario: data.QSA || data.socios || data.qsa?.map((socio: any) => ({
             nome: socio.nome || socio.nome_socio,
-            documento: socio.cpf_cnpj_socio || socio.documento,
-            tipo: socio.identificador_socio === 'Pessoa Física' || socio.tipo === 'Pessoa Física' ? 'PF' : 'PJ',
-            qualificacao: socio.qualificacao_socio?.descricao || socio.qualificacao_socio || socio.qualificacao,
+            documento: socio.cpf_cnpj_socio || socio.documento || socio.cnpj_cpf_do_socio,
+            tipo: socio.identificador_socio === 'Pessoa Física' || socio.tipo === 'Pessoa Física' || socio.identificador_de_socio === 2 ? 'PF' : 'PJ',
+            qualificacao: socio.qualificacao_socio?.descricao || socio.qualificacao_socio || socio.qualificacao || socio.qualificacao_socio,
             data_entrada: socio.data_entrada_sociedade || socio.data_entrada,
-            faixa_etaria: socio.faixa_etaria
-          })),
+            faixa_etaria: socio.faixa_etaria || socio.descricao_faixa_etaria
+          })) || [],
           
           // Metadata da API usada
           _api_info: {
