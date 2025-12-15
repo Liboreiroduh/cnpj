@@ -8,7 +8,7 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Search, Building2, MapPin, Phone, Mail, Users, Briefcase, AlertCircle, CheckCircle, Clock, Zap, Globe } from 'lucide-react';
+import { Search, Building2, MapPin, Phone, Mail, Users, Briefcase, AlertCircle, CheckCircle, Clock, Zap, Globe, Shield, Key, RefreshCw } from 'lucide-react';
 
 interface CNPJData {
   // Dados principais
@@ -223,8 +223,8 @@ export default function ConsultaCNPJMulti() {
       <div className="max-w-6xl mx-auto space-y-6">
         {/* Cabeçalho */}
         <div className="text-center space-y-2">
-          <h1 className="text-3xl font-bold text-zinc-900">Consulta CNPJ Multi-API</h1>
-          <p className="text-zinc-600">Dados públicos via múltiplas APIs com bypass automático</p>
+          <h1 className="text-3xl font-bold text-zinc-900">🕵️ Consulta CNPJ Multi-API</h1>
+          <p className="text-zinc-600">Bypass automático de rate limit com múltiplas fontes</p>
         </div>
 
         {/* Campo de Consulta */}
@@ -243,7 +243,7 @@ export default function ConsultaCNPJMulti() {
               <Button 
                 onClick={handleSearch} 
                 disabled={loading || cnpjInput.replace(/\D/g, '').length !== 14}
-                className="min-w-[100px]"
+                className="min-w-[120px]"
               >
                 {loading ? (
                   <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
@@ -267,10 +267,49 @@ export default function ConsultaCNPJMulti() {
               Digite apenas os 14 números do CNPJ. O sistema formatará automaticamente.
             </div>
             <div className="mt-2 text-xs text-zinc-500">
-              <strong>Teste rate limit:</strong> 45259906000163 | <strong>Funcionais:</strong> 23246139000115 | 04259026000110 | 33592510000154
+              <strong>🧪 Teste Rate Limit:</strong> 45259906000163 | <strong>✅ Funcionais:</strong> 23246139000115 | 04259026000110 | 33592510000154
             </div>
           </CardContent>
         </Card>
+
+        {/* Cards de Informação */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <Card className="bg-blue-50 border-blue-200">
+            <CardContent className="p-4">
+              <div className="flex items-center gap-2 mb-2">
+                <RefreshCw className="w-4 h-4 text-blue-600" />
+                <h3 className="font-semibold text-blue-900">Rotação Automática</h3>
+              </div>
+              <p className="text-sm text-blue-700">
+                4 APIs diferentes com fallback inteligente
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-green-50 border-green-200">
+            <CardContent className="p-4">
+              <div className="flex items-center gap-2 mb-2">
+                <Shield className="w-4 h-4 text-green-600" />
+                <h3 className="font-semibold text-green-900">Bypass 429</h3>
+              </div>
+              <p className="text-sm text-green-700">
+                Contorna automaticamente limites de requisição
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-purple-50 border-purple-200">
+            <CardContent className="p-4">
+              <div className="flex items-center gap-2 mb-2">
+                <Key className="w-4 h-4 text-purple-600" />
+                <h3 className="font-semibold text-purple-900">Multi-Identidade</h3>
+              </div>
+              <p className="text-sm text-purple-700">
+                User-Agents e headers variados
+              </p>
+            </CardContent>
+          </Card>
+        </div>
 
         {/* Mensagens de Erro */}
         {error && (
@@ -298,9 +337,16 @@ export default function ConsultaCNPJMulti() {
           <Alert>
             <Globe className="h-4 w-4" />
             <AlertDescription>
-              <strong>Fonte:</strong> {data._api_info.fonte}
-              <div className="text-xs text-zinc-600 mt-1">
-                Consultado em: {new Date(data._api_info.timestamp).toLocaleString('pt-BR')}
+              <div className="flex items-center justify-between">
+                <div>
+                  <strong>Fonte:</strong> {data._api_info.fonte}
+                  <div className="text-xs text-zinc-600 mt-1">
+                    Consultado em: {new Date(data._api_info.timestamp).toLocaleString('pt-BR')}
+                  </div>
+                </div>
+                <Badge variant="outline" className="text-xs">
+                  🚀 Multi-API Ativa
+                </Badge>
               </div>
             </AlertDescription>
           </Alert>

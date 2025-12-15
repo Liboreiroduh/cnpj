@@ -94,7 +94,7 @@ interface CNPJData {
   };
 }
 
-export default function ConsultaCNPJMulti() {
+export default function ConsultaCNPJ() {
   const [cnpjInput, setCnpjInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState<CNPJData | null>(null);
@@ -223,8 +223,8 @@ export default function ConsultaCNPJMulti() {
       <div className="max-w-6xl mx-auto space-y-6">
         {/* Cabeçalho */}
         <div className="text-center space-y-2">
-          <h1 className="text-3xl font-bold text-zinc-900">🕵️ Consulta CNPJ Multi-API</h1>
-          <p className="text-zinc-600">Bypass automático de rate limit com múltiplas fontes</p>
+          <h1 className="text-3xl font-bold text-zinc-900">Consulta CNPJ Multi-API</h1>
+          <p className="text-zinc-600">Dados públicos via múltiplas APIs com bypass automático</p>
         </div>
 
         {/* Campo de Consulta */}
@@ -249,8 +249,8 @@ export default function ConsultaCNPJMulti() {
                   <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
                 ) : (
                   <>
-                    <Zap className="w-4 h-4 mr-2" />
-                    Consultar Multi
+                    <Search className="w-4 h-4 mr-2" />
+                    Consultar
                   </>
                 )}
               </Button>

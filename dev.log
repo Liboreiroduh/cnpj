@@ -1,0 +1,266 @@
+   ▲ Next.js 15.3.5
+   - Local:        http://localhost:3000
+   - Network:      http://21.0.5.131:3000
+   - Environments: .env
+
+ ✓ Starting...
+Attention: Next.js now collects completely anonymous telemetry regarding usage.
+This information is used to shape Next.js' roadmap and prioritize features.
+You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+https://nextjs.org/telemetry
+
+ ✓ Ready in 2.5s
+ ○ Compiling / ...
+ ✓ Compiled / in 5.9s (764 modules)
+ GET / 200 in 6691ms
+ GET / 200 in 129ms
+ GET / 200 in 359ms
+ GET / 200 in 562ms
+ GET / 200 in 259ms
+ ✓ Compiled in 354ms (359 modules)
+ GET / 200 in 47ms
+ ✓ Compiled in 207ms (359 modules)
+ ✓ Compiled in 300ms (732 modules)
+ GET / 200 in 269ms
+ GET / 200 in 27ms
+ ✓ Compiled in 983ms (782 modules)
+ GET / 200 in 293ms
+ ○ Compiling /api/cnpj ...
+ ✓ Compiled /api/cnpj in 564ms (787 modules)
+Erro na consulta CNPJ: [Error: Unable to connect. Is the computer able to access the url?] {
+  code: 'ConnectionRefused',
+  path: 'https://api.cnpj.ws/cnpj/23246139000115',
+  errno: 0
+}
+ GET /api/cnpj?cnpj=23246139000115 500 in 1562ms
+ ✓ Compiled in 503ms (801 modules)
+ GET / 200 in 304ms
+ ✓ Compiled in 466ms (783 modules)
+ GET / 200 in 112ms
+ ✓ Compiled /api/cnpj in 172ms (423 modules)
+Tentando API: https://publica.cnpj.ws/cnpj/23246139000115
+ GET / 200 in 69ms
+Dados recebidos: {"cnpj_raiz":"23246139","razao_social":"MACHINE LTDA","capital_social":"100000.00","responsavel_federativo":"","atualizado_em":"2025-12-13T03:00:00.000Z","porte":{"id":"01","descricao":"Micro Empresa"
+ GET /api/cnpj?cnpj=23246139000115 200 in 1369ms
+Tentando API: https://publica.cnpj.ws/cnpj/23246139000115
+Dados recebidos: {"cnpj_raiz":"23246139","razao_social":"MACHINE LTDA","capital_social":"100000.00","responsavel_federativo":"","atualizado_em":"2025-12-13T03:00:00.000Z","porte":{"id":"01","descricao":"Micro Empresa"
+ GET /api/cnpj?cnpj=23246139000115 200 in 299ms
+Tentando API: https://publica.cnpj.ws/cnpj/23246139000115
+Dados recebidos: {"cnpj_raiz":"23246139","razao_social":"MACHINE LTDA","capital_social":"100000.00","responsavel_federativo":"","atualizado_em":"2025-12-13T03:00:00.000Z","porte":{"id":"01","descricao":"Micro Empresa"
+ GET /api/cnpj?cnpj=23246139000115 200 in 299ms
+ ⚠ Cross origin request detected from preview-chat-87104c73-2758-4425-8b83-297d15c6331c.space.z.ai to /_next/* resource. In a future major version of Next.js, you will need to explicitly configure "allowedDevOrigins" in next.config to allow this.
+Read more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allowedDevOrigins
+ GET / 200 in 113ms
+Tentando API: https://publica.cnpj.ws/cnpj/23246139000115
+Tentando API: https://minhareceita.org/23246139000115
+Dados recebidos: {"uf":"MG","cep":"39400215","qsa":[{"pais":null,"nome_socio":"JOSE TADEU PEREIRA","codigo_pais":null,"faixa_etaria":"Entre 41 a 50 anos","cnpj_cpf_do_socio":"***672966**","qualificacao_socio":"Sócio-A
+ GET /api/cnpj?cnpj=23246139000115 200 in 807ms
+Tentando API: https://publica.cnpj.ws/cnpj/23246139000115
+Tentando API: https://minhareceita.org/23246139000115
+Dados recebidos: {"uf":"MG","cep":"39400215","qsa":[{"pais":null,"nome_socio":"JOSE TADEU PEREIRA","codigo_pais":null,"faixa_etaria":"Entre 41 a 50 anos","cnpj_cpf_do_socio":"***672966**","qualificacao_socio":"Sócio-A
+ GET /api/cnpj?cnpj=23246139000115 200 in 714ms
+Tentando API: https://publica.cnpj.ws/cnpj/23246139000115
+Dados recebidos: {"cnpj_raiz":"23246139","razao_social":"MACHINE LTDA","capital_social":"100000.00","responsavel_federativo":"","atualizado_em":"2025-12-13T03:00:00.000Z","porte":{"id":"01","descricao":"Micro Empresa"
+ GET /api/cnpj?cnpj=23246139000115 200 in 556ms
+Tentando API: https://publica.cnpj.ws/cnpj/23246139000115
+Dados recebidos: {"cnpj_raiz":"23246139","razao_social":"MACHINE LTDA","capital_social":"100000.00","responsavel_federativo":"","atualizado_em":"2025-12-13T03:00:00.000Z","porte":{"id":"01","descricao":"Micro Empresa"
+ GET /api/cnpj?cnpj=23246139000115 200 in 301ms
+Tentando API: https://publica.cnpj.ws/cnpj/00000000000000
+Tentando API: https://minhareceita.org/00000000000000
+ GET /api/cnpj?cnpj=00000000000000 404 in 1276ms
+Tentando API: https://publica.cnpj.ws/cnpj/23246139000115
+Dados recebidos: {"cnpj_raiz":"23246139","razao_social":"MACHINE LTDA","capital_social":"100000.00","responsavel_federativo":"","atualizado_em":"2025-12-13T03:00:00.000Z","porte":{"id":"01","descricao":"Micro Empresa"
+ GET /api/cnpj?cnpj=23246139000115 200 in 303ms
+ ✓ Compiled in 555ms (783 modules)
+ GET / 200 in 308ms
+ ✓ Compiled in 646ms (783 modules)
+ GET / 200 in 282ms
+ ✓ Compiled /api/cnpj in 172ms (423 modules)
+Consultando API: https://publica.cnpj.ws/cnpj/23246139000115
+ GET / 200 in 63ms
+Dados recebidos: {"cnpj_raiz":"23246139","razao_social":"MACHINE LTDA","capital_social":"100000.00","responsavel_federativo":"","atualizado_em":"2025-12-13T03:00:00.000Z","porte":{"id":"01","descricao":"Micro Empresa"
+ GET /api/cnpj?cnpj=23246139000115 200 in 884ms
+Consultando API: https://publica.cnpj.ws/cnpj/23246139000115
+Dados recebidos: {"cnpj_raiz":"23246139","razao_social":"MACHINE LTDA","capital_social":"100000.00","responsavel_federativo":"","atualizado_em":"2025-12-13T03:00:00.000Z","porte":{"id":"01","descricao":"Micro Empresa"
+ GET /api/cnpj?cnpj=23246139000115 200 in 763ms
+ ✓ Compiled in 172ms (378 modules)
+ GET / 200 in 274ms
+Consultando API: https://publica.cnpj.ws/cnpj/23246139000115
+Dados recebidos: {"cnpj_raiz":"23246139","razao_social":"MACHINE LTDA","capital_social":"100000.00","responsavel_federativo":"","atualizado_em":"2025-12-13T03:00:00.000Z","porte":{"id":"01","descricao":"Micro Empresa"
+ GET /api/cnpj?cnpj=23246139000115 200 in 876ms
+ ✓ Compiled in 632ms (783 modules)
+ GET / 200 in 298ms
+ ✓ Compiled in 454ms (783 modules)
+ GET / 200 in 56ms
+ ✓ Compiled in 394ms (783 modules)
+ GET / 200 in 50ms
+ ✓ Compiled in 388ms (783 modules)
+ GET / 200 in 128ms
+ ✓ Compiled in 467ms (783 modules)
+ GET / 200 in 321ms
+ ✓ Compiled in 433ms (783 modules)
+ GET / 200 in 296ms
+ ✓ Compiled /api/cnpj in 436ms (423 modules)
+Consultando API: https://publica.cnpj.ws/cnpj/22675359000110
+ GET /api/cnpj?cnpj=22675359000110 400 in 1585ms
+Consultando API: https://publica.cnpj.ws/cnpj/04259026000110
+ GET /api/cnpj?cnpj=04259026000110 400 in 640ms
+Consultando API: https://publica.cnpj.ws/cnpj/23246139000115
+Dados recebidos: {"cnpj_raiz":"23246139","razao_social":"MACHINE LTDA","capital_social":"100000.00","responsavel_federativo":"","atualizado_em":"2025-12-13T03:00:00.000Z","porte":{"id":"01","descricao":"Micro Empresa"
+ GET /api/cnpj?cnpj=23246139000115 200 in 737ms
+ ✓ Compiled in 542ms (801 modules)
+ GET / 200 in 330ms
+Consultando API: https://publica.cnpj.ws/cnpj/33592510000154
+ GET /api/cnpj?cnpj=33592510000154 429 in 743ms
+Consultando API: https://publica.cnpj.ws/cnpj/45259906000163
+ GET /api/cnpj?cnpj=45259906000163 429 in 756ms
+Consultando API: https://publica.cnpj.ws/cnpj/45259906000163
+ GET /api/cnpj?cnpj=45259906000163 429 in 341ms
+ ✓ Compiled in 630ms (801 modules)
+ GET / 200 in 78ms
+Consultando API: https://publica.cnpj.ws/cnpj/45259906000163
+Dados recebidos: {"cnpj_raiz":"45259906","razao_social":"MOC IMPERMEABILIZANTES COMERCIO LTDA","capital_social":"40000.00","responsavel_federativo":"","atualizado_em":"2025-12-13T03:00:00.000Z","porte":{"id":"01","des
+ GET /api/cnpj?cnpj=45259906000163 200 in 287ms
+Consultando API: https://publica.cnpj.ws/cnpj/45259906000163
+Dados recebidos: {"cnpj_raiz":"45259906","razao_social":"MOC IMPERMEABILIZANTES COMERCIO LTDA","capital_social":"40000.00","responsavel_federativo":"","atualizado_em":"2025-12-13T03:00:00.000Z","porte":{"id":"01","des
+ GET /api/cnpj?cnpj=45259906000163 200 in 287ms
+Consultando API: https://publica.cnpj.ws/cnpj/45259906000163
+ GET /api/cnpj?cnpj=45259906000163 429 in 286ms
+Consultando API: https://publica.cnpj.ws/cnpj/45259906000163
+ GET /api/cnpj?cnpj=45259906000163 429 in 293ms
+Consultando API: https://publica.cnpj.ws/cnpj/45259906000163
+ GET /api/cnpj?cnpj=45259906000163 429 in 304ms
+ ✓ Compiled in 485ms (801 modules)
+ GET / 200 in 66ms
+Consultando API: https://publica.cnpj.ws/cnpj/23246139000115
+ GET /api/cnpj?cnpj=23246139000115 429 in 335ms
+ ✓ Compiled in 248ms (378 modules)
+ GET / 200 in 278ms
+ ✓ Compiled in 205ms (378 modules)
+ ✓ Compiled in 392ms (769 modules)
+ GET / 200 in 325ms
+ GET / 200 in 39ms
+ ✓ Compiled in 274ms (378 modules)
+ GET / 200 in 271ms
+ ✓ Compiled /api/cnpj-multi in 421ms (787 modules)
+Tentando API: CNPJ.ws (pública) - https://publica.cnpj.ws/cnpj/45259906000163
+✅ Sucesso com CNPJ.ws (pública): {"cnpj_raiz":"45259906","razao_social":"MOC IMPERMEABILIZANTES COMERCIO LTDA","capital_social":"40000.00","responsavel_federativo":"","atualizado_em":"2025-12-13T03:00:00.000Z","porte":{"id":"01","des
+ GET /api/cnpj-multi?cnpj=45259906000163 200 in 764ms
+Tentando API: CNPJ.ws (pública) - https://publica.cnpj.ws/cnpj/23246139000115
+✅ Sucesso com CNPJ.ws (pública): {"cnpj_raiz":"23246139","razao_social":"MACHINE LTDA","capital_social":"100000.00","responsavel_federativo":"","atualizado_em":"2025-12-13T03:00:00.000Z","porte":{"id":"01","descricao":"Micro Empresa"
+ GET /api/cnpj-multi?cnpj=23246139000115 200 in 816ms
+ ✓ Compiled in 192ms (378 modules)
+ GET / 200 in 284ms
+ GET / 200 in 111ms
+ GET / 200 in 87ms
+ ✓ Compiled in 1088ms (791 modules)
+ GET / 200 in 126ms
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ GET / 200 in 137ms
+ ✓ Compiled /api/cnpj-multi in 161ms (427 modules)
+Tentando API: CNPJ.ws (pública) - https://publica.cnpj.ws/cnpj/45259906000163
+✅ Sucesso com CNPJ.ws (pública): {"cnpj_raiz":"45259906","razao_social":"MOC IMPERMEABILIZANTES COMERCIO LTDA","capital_social":"40000.00","responsavel_federativo":"","atualizado_em":"2025-12-13T03:00:00.000Z","porte":{"id":"01","des
+ GET /api/cnpj-multi?cnpj=45259906000163 200 in 513ms
+ GET / 200 in 140ms
+ ✓ Compiled in 245ms (382 modules)
+ GET / 200 in 55ms
+ ✓ Compiled in 167ms (382 modules)
+ GET / 200 in 265ms
+ ✓ Compiled in 204ms (382 modules)
+ GET / 200 in 66ms
+ ○ Compiling /_not-found ...
+ ✓ Compiled /_not-found in 1053ms (781 modules)
+ GET /_next/static/css/app/layout.css?v=1765824869084 404 in 1212ms
+ GET / 200 in 106ms
+ GET /_next/static/css/app/layout.css?v=1765824875686 404 in 54ms
+ GET /_next/static/chunks/main-app.js?v=1765824875686 404 in 44ms
+ GET /_next/static/chunks/app-pages-internals.js 404 in 46ms
+ GET /_next/static/chunks/app/page.js 404 in 47ms
+ GET / 200 in 59ms
+ GET / 200 in 67ms
+ GET /_next/static/css/app/layout.css?v=1765824890070 404 in 265ms
+ GET /_next/static/chunks/main-app.js?v=1765824890070 404 in 59ms
+ GET /_next/static/chunks/app-pages-internals.js 404 in 46ms
+ GET /_next/static/chunks/app/page.js 404 in 277ms
+ ⨯ Error: ENOENT: no such file or directory, open '/home/z/my-project/.next/server/app-paths-manifest.json'
+    at readFileSync (null)
+    at processTicksAndRejections (null) {
+  code: 'ENOENT',
+  path: '/home/z/my-project/.next/server/app-paths-manifest.json',
+  syscall: 'open',
+  errno: -2,
+  page: '/'
+}
+ ○ Compiling /_error ...
+ ✓ Compiled /_error in 3.6s (1115 modules)
+ ⨯ error: Cannot find module './548.js' from '/home/z/my-project/.next/server/webpack-runtime.js'
+ GET / 500 in 9014ms
+ ⨯ error: Cannot find module './447.js' from '/home/z/my-project/.next/server/webpack-runtime.js'
+ ⨯ error: Cannot find module './548.js' from '/home/z/my-project/.next/server/webpack-runtime.js'
+ GET / 500 in 611ms
+ ✓ Compiled in 382ms (629 modules)
+ ⨯ error: Cannot find module './447.js' from '/home/z/my-project/.next/server/webpack-runtime.js'
+ ○ Compiling /_not-found ...
+ ✓ Compiled /_not-found in 813ms (1115 modules)
+ ⨯ TypeError: e[o] is not a function. (In 'e[o](a, a.exports, t)', 'e[o]' is undefined)
+    at t (.next/server/webpack-runtime.js:1:125)
+    at parse (null)
+    at processTicksAndRejections (null) {
+  digest: '3361939790'
+}
+TypeError: e[o] is not a function. (In 'e[o](a, a.exports, t)', 'e[o]' is undefined)
+    at t (.next/server/webpack-runtime.js:1:125)
+    at parse (null)
+    at processTicksAndRejections (null)
+ ⨯ TypeError: e[o] is not a function. (In 'e[o](a, a.exports, t)', 'e[o]' is undefined)
+    at t (.next/server/webpack-runtime.js:1:125)
+    at parse (null)
+    at processTicksAndRejections (null)
+ GET /_next/static/webpack/61ddcd2472f5cec9.webpack.hot-update.json 500 in 1407ms
+ GET / 500 in 1759ms
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ⨯ TypeError: e[o] is not a function. (In 'e[o](a, a.exports, t)', 'e[o]' is undefined)
+    at t (.next/server/webpack-runtime.js:1:125)
+    at parse (null)
+    at processTicksAndRejections (null) {
+  digest: '3361939790'
+}
+TypeError: e[o] is not a function. (In 'e[o](a, a.exports, t)', 'e[o]' is undefined)
+    at t (.next/server/webpack-runtime.js:1:125)
+    at parse (null)
+    at processTicksAndRejections (null)
+ ⨯ TypeError: e[o] is not a function. (In 'e[o](a, a.exports, t)', 'e[o]' is undefined)
+    at t (.next/server/webpack-runtime.js:1:125)
+    at parse (null)
+    at processTicksAndRejections (null) {
+  page: '/'
+}
+ GET / 500 in 618ms
+ ✓ Compiled in 221ms (609 modules)
+ ⨯ TypeError: e[o] is not a function. (In 'e[o](a, a.exports, t)', 'e[o]' is undefined)
+    at t (.next/server/webpack-runtime.js:1:125)
+    at parse (null)
+    at processTicksAndRejections (null) {
+  digest: '3361939790'
+}
+TypeError: e[o] is not a function. (In 'e[o](a, a.exports, t)', 'e[o]' is undefined)
+    at t (.next/server/webpack-runtime.js:1:125)
+    at parse (null)
+    at processTicksAndRejections (null)
+ ⨯ TypeError: e[o] is not a function. (In 'e[o](a, a.exports, t)', 'e[o]' is undefined)
+    at t (.next/server/webpack-runtime.js:1:125)
+    at parse (null)
+    at processTicksAndRejections (null)
+ GET / 500 in 766ms
+ ✓ Compiled in 1239ms (1125 modules)
+ GET / 200 in 249ms
+ ○ Compiling /_not-found ...
+ ✓ Compiled /_not-found in 1251ms (1115 modules)
+ ⨯ error: Cannot find module './447.js' from '/home/z/my-project/.next/server/webpack-runtime.js'
+ ⨯ error: Cannot find module './447.js' from '/home/z/my-project/.next/server/webpack-runtime.js'
+ ⨯ error: Cannot find module './447.js' from '/home/z/my-project/.next/server/webpack-runtime.js'
+ GET /_next/static/webpack/61ddcd2472f5cec9.webpack.hot-update.json 500 in 2310ms
+ GET /_next/static/css/app/layout.css?v=1765825343469 500 in 1291ms
+ GET /_next/static/chunks/main-app.js?v=1765825343469 500 in 1153ms
+ ⨯ error: Cannot find module './447.js' from '/home/z/my-project/.next/server/webpack-runtime.js'
+ GET /_next/static/chunks/app-pages-internals.js 500 in 351ms
