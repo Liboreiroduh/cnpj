@@ -479,3 +479,23 @@ Syntax error: tailwindcss: /home/z/my-project/src/app/globals.css Cannot apply u
  GET /_next/static/chunks/fallback/pages/_app.js 404 in 105ms
  GET /_next/static/chunks/fallback/react-refresh.js 404 in 448ms
  GET /_next/static/chunks/fallback/pages/_error.js 404 in 786ms
+ ⚠ Found a change in next.config.ts. Restarting the server to apply the changes...
+   ▲ Next.js 15.3.5
+   - Local:        http://localhost:3000
+   - Network:      http://21.0.5.131:3000
+   - Environments: .env
+
+ ✓ Starting...
+ ⚠ Invalid next.config.ts options detected: 
+ ⚠     Unrecognized key(s) in object: 'runtime' at "experimental"
+ ⚠     Unrecognized key(s) in object: 'port'
+ ⚠ See more info here: https://nextjs.org/docs/messages/invalid-next-config
+ ✓ Ready in 1711ms
+ ⚠ Found a change in next.config.ts. Restarting the server to apply the changes...
+   ▲ Next.js 15.3.5
+   - Local:        http://localhost:3000
+   - Network:      http://21.0.5.131:3000
+   - Environments: .env
+
+ ✓ Starting...
+ ✓ Ready in 1755ms

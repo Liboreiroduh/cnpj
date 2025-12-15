@@ -10,6 +10,9 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  // Ensure proper server configuration
+  poweredByHeader: false,
+  compress: true,
 };
 
 export default nextConfig;

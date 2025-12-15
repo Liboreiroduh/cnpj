@@ -8,13 +8,13 @@ This project is **100% compatible** with Render and ready for production deploym
 
 #### ✅ **Runtime & Build**
 - **Node.js Version**: Compatible with Render's Node.js runtime
-- **Build Command**: `npm run build` (generates standalone build)
-- **Start Command**: `npm start` (uses standalone server)
+- **Build Command**: `npm install && npm run build` (generates standalone build)
+- **Start Command**: `npm run start:render` (uses custom port handler)
 - **Framework**: Next.js 15 with App Router (fully supported)
 
 #### ✅ **Configuration**
 - **Standalone Output**: Configured in `next.config.ts`
-- **Port**: Uses Render's `$PORT` environment variable automatically
+- **Port Handling**: Custom `start-render.js` script for Render's `$PORT`
 - **Static Files**: Properly configured for `/public` directory
 - **Build Process**: Optimized for Render's build environment
 
@@ -43,7 +43,7 @@ This project is **100% compatible** with Render and ready for production deploym
 Name: cnpj-consultation
 Root Directory: ./
 Build Command: npm install && npm run build
-Start Command: npm start
+Start Command: npm run start:render
 ```
 
 ### 3. **Environment Variables** (Optional)
@@ -54,6 +54,7 @@ No environment variables required - all APIs are public.
 Runtime: Node (latest)
 Instance Type: Free (or paid for production)
 Auto-Deploy: Yes (recommended)
+Health Check Path: /
 ```
 
 ### 5. **Deploy**
@@ -72,6 +73,11 @@ Click "Create Web Service" and Render will:
 - **Build Target**: Production-ready
 - **Asset Optimization**: Enabled
 - **Source Maps**: Disabled for production
+
+### Port Configuration
+- **Custom Script**: `start-render.js` handles Render's `$PORT` variable
+- **Automatic Detection**: Uses `process.env.PORT` or defaults to 3000
+- **Health Check**: Configured for Render's monitoring
 
 ### API Endpoints
 - **Main API**: `/api/cnpj-multi` (multi-API bypass system)
@@ -96,6 +102,7 @@ Click "Create Web Service" and Render will:
 3. **No External Services**: Uses public APIs only
 4. **Optimized Build**: Standalone mode for fast deployment
 5. **Production Ready**: All configurations tested
+6. **Port Handling**: Custom script for Render compatibility
 
 ---
 
@@ -103,6 +110,22 @@ Click "Create Web Service" and Render will:
 
 After deployment, your app will be available at:
 `https://cnpj-consultation.onrender.com`
+
+---
+
+## 🛠️ Troubleshooting
+
+### Error 502 (Bad Gateway)
+If you encounter a 502 error:
+1. Check the logs in Render dashboard
+2. Verify the start command: `npm run start:render`
+3. Ensure health check path is set to `/`
+4. The custom `start-render.js` script should handle port issues
+
+### Build Issues
+- Ensure Node.js version is set to "latest"
+- Check that all dependencies are installed correctly
+- Verify the build completes successfully
 
 ---
 
