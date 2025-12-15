@@ -167,16 +167,29 @@ export default function ConsultaCNPJMulti() {
     setData(null);
 
     try {
+      console.log('🔍 Fazendo consulta para CNPJ:', cleanedCnpj);
       const response = await fetch(`/api/cnpj-multi?cnpj=${cleanedCnpj}`);
+      console.log('📡 Status da resposta:', response.status);
+      
       const result = await response.json();
+      console.log('📋 Resposta completa da API:', result);
+      console.log('📞 Telefones na resposta:', result.telefones);
+      console.log('📧 Email na resposta:', result.email);
 
       if (!response.ok) {
         setError(result.error || 'Erro ao consultar CNPJ');
         return;
       }
 
+      console.log('✅ Dados recebidos pelo frontend:', {
+        telefones: result.telefones,
+        email: result.email,
+        telefonesLength: result.telefones?.length || 0
+      });
+      
       setData(result);
     } catch (err) {
+      console.error('❌ Erro na consulta:', err);
       setError('Erro de conexão. Tente novamente.');
     } finally {
       setLoading(false);
@@ -539,7 +552,7 @@ export default function ConsultaCNPJMulti() {
             )}
 
             {/* BLOCO 4 - CONTATO */}
-            {(data.telefones && data.telefones.length > 0) || data.email && (
+            {(data.telefones && data.telefones.length > 0) || data.email ? (
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
@@ -569,7 +582,7 @@ export default function ConsultaCNPJMulti() {
                   )}
                 </CardContent>
               </Card>
-            )}
+            ) : null}
 
             {/* BLOCO 5 - CNAE */}
             {data.cnae_principal && (

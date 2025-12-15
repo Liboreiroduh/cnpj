@@ -776,3 +776,32 @@ Tentando API: CNPJ.ws (pública) - https://publica.cnpj.ws/cnpj/35621926000189
 ✅ CNPJ.ws (pública) TEM CONTATOS - Telefone: true, Email: true
 📋 Dados mapeados - Telefone: 1, Email: Sim
  GET /api/cnpj-multi?cnpj=35621926000189 200 in 1223ms
+ ⨯ error: Cannot find module './447.js' from '/home/z/my-project/.next/server/webpack-runtime.js'
+ ⨯ error: Cannot find module './548.js' from '/home/z/my-project/.next/server/webpack-runtime.js'
+ ⨯ error: Cannot find module './447.js' from '/home/z/my-project/.next/server/webpack-runtime.js'
+ ⨯ error: Cannot find module './548.js' from '/home/z/my-project/.next/server/webpack-runtime.js'
+ GET / 500 in 5875ms
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename '/home/z/my-project/.next/cache/webpack/client-development-fallback/0.pack.gz_' -> '/home/z/my-project/.next/cache/webpack/client-development-fallback/0.pack.gz'
+Tentando API: CNPJ.ws (pública) - https://publica.cnpj.ws/cnpj/35621926000189
+✅ Sucesso com CNPJ.ws (pública)
+✅ CNPJ.ws (pública) TEM CONTATOS - Telefone: true, Email: true
+📋 Dados mapeados - Telefone: 1, Email: Sim
+ GET /api/cnpj-multi?cnpj=35621926000189 200 in 843ms
+ ⨯ error: Cannot find module './447.js' from '/home/z/my-project/.next/server/webpack-runtime.js'
+ ⨯ error: Cannot find module './548.js' from '/home/z/my-project/.next/server/webpack-runtime.js'
+ GET / 500 in 430ms
+ ✓ Compiled in 754ms (1090 modules)
+ ⨯ error: ENOENT reading "/home/z/my-project/.next/server/vendor-chunks/lucide-react.js"
+ ⨯ error: Cannot find module './548.js' from '/home/z/my-project/.next/server/webpack-runtime.js'
+ GET / 500 in 478ms
+ ○ Compiling /_not-found ...
+ ✓ Compiled /_not-found in 2.4s (1080 modules)
+ ✓ Compiled in 730ms (1094 modules)
+ GET /_next/static/webpack/d7032df1e7a2011f.webpack.hot-update.json 404 in 69ms
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ⨯ error: ENOENT reading "/home/z/my-project/.next/server/vendor-chunks/lucide-react.js"
+ ⨯ error: Cannot find module './548.js' from '/home/z/my-project/.next/server/webpack-runtime.js'
+ ⨯ error: ENOENT reading "/home/z/my-project/.next/server/vendor-chunks/lucide-react.js"
+ ⨯ error: Cannot find module './548.js' from '/home/z/my-project/.next/server/webpack-runtime.js'
+ GET / 500 in 490ms
+ GET / 500 in 981ms
