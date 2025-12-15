@@ -21,14 +21,22 @@ export async function GET(request: NextRequest) {
     );
   }
 
-  // Lista de APIs públicas para CNPJ
+  // Lista de APIs públicas para CNPJ - PRIORIZADAS POR CONTATOS
   const apis = [
     {
-      name: 'CNPJ.ws (pública)',
+      name: 'CNPJ.ws (pública) - MELHOR CONTATOS',
       url: `https://publica.cnpj.ws/cnpj/${cleanCnpj}`,
       headers: {
         'Accept': 'application/json',
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+      }
+    },
+    {
+      name: 'ReceitaWS - CONTATOS GARANTIDOS',
+      url: `https://receitaws.com.br/v1/cnpj/${cleanCnpj}`,
+      headers: {
+        'Accept': 'application/json',
+        'User-Agent': 'Python/3.9.0'
       }
     },
     {
@@ -45,14 +53,6 @@ export async function GET(request: NextRequest) {
       headers: {
         'Accept': 'application/json',
         'User-Agent': 'Java/11.0.1'
-      }
-    },
-    {
-      name: 'ReceitaWS (backup)',
-      url: `https://receitaws.com.br/v1/cnpj/${cleanCnpj}`,
-      headers: {
-        'Accept': 'application/json',
-        'User-Agent': 'Python/3.9.0'
       }
     }
   ];
@@ -131,9 +131,17 @@ export async function GET(request: NextRequest) {
           cep: data.cep || data.estabelecimento?.cep,
           codigo_ibge: data.estabelecimento?.cidade?.ibge_id?.toString() || data.codigo_municipio_ibge?.toString(),
           
-          // CONTATOS - MAPEAMENTO COMPLETO
+          // CONTATOS - MAPEAMENTO COMPLETO COM DEBUG
           telefones: (() => {
             const telefonesArray: Array<{ddd?: string, numero?: string, is_fax?: boolean}> = [];
+            
+            console.log(`🔍 Mapeando telefones para ${api.name}:`, {
+              'data.telefone': data.telefone,
+              'data.estabelecimento?.telefone1': data.estabelecimento?.telefone1,
+              'data.estabelecimento?.ddd1': data.estabelecimento?.ddd1,
+              'data.telefone1': data.telefone1,
+              'data.ddd_telefone_1': data.ddd_telefone_1
+            });
             
             // API CNPJ.ws
             if (data.estabelecimento?.ddd1 && data.estabelecimento?.telefone1) {
@@ -142,6 +150,7 @@ export async function GET(request: NextRequest) {
                 numero: data.estabelecimento.telefone1,
                 is_fax: false
               });
+              console.log(`✅ Telefone CNPJ.ws: (${data.estabelecimento.ddd1}) ${data.estabelecimento.telefone1}`);
             }
             if (data.estabelecimento?.ddd2 && data.estabelecimento?.telefone2) {
               telefonesArray.push({
@@ -149,6 +158,7 @@ export async function GET(request: NextRequest) {
                 numero: data.estabelecimento.telefone2,
                 is_fax: false
               });
+              console.log(`✅ Telefone 2 CNPJ.ws: (${data.estabelecimento.ddd2}) ${data.estabelecimento.telefone2}`);
             }
             if (data.estabelecimento?.ddd_fax && data.estabelecimento?.fax) {
               telefonesArray.push({
@@ -156,6 +166,7 @@ export async function GET(request: NextRequest) {
                 numero: data.estabelecimento.fax,
                 is_fax: true
               });
+              console.log(`✅ FAX CNPJ.ws: (${data.estabelecimento.ddd_fax}) ${data.estabelecimento.fax}`);
             }
             
             // API MinhaReceita
@@ -165,6 +176,7 @@ export async function GET(request: NextRequest) {
                 numero: data.telefone_1,
                 is_fax: false
               });
+              console.log(`✅ Telefone MinhaReceita: (${data.ddd_telefone_1}) ${data.telefone_1}`);
             }
             if (data.ddd_telefone_2 && data.telefone_2) {
               telefonesArray.push({
@@ -172,6 +184,7 @@ export async function GET(request: NextRequest) {
                 numero: data.telefone_2,
                 is_fax: false
               });
+              console.log(`✅ Telefone 2 MinhaReceita: (${data.ddd_telefone_2}) ${data.telefone_2}`);
             }
             if (data.ddd_fax && data.fax) {
               telefonesArray.push({
@@ -179,11 +192,13 @@ export async function GET(request: NextRequest) {
                 numero: data.fax,
                 is_fax: true
               });
+              console.log(`✅ FAX MinhaReceita: (${data.ddd_fax}) ${data.fax}`);
             }
             
             // API ReceitaWS - CAMPO ESPECÍFICO
             if (data.telefone) {
               const tel = data.telefone.toString();
+              console.log(`🔍 Processando telefone ReceitaWS: ${tel}`);
               // Formato: "(38) 9856-6015"
               const cleanedTel = tel.replace(/\D/g, '');
               if (cleanedTel.length >= 10) {
@@ -192,6 +207,7 @@ export async function GET(request: NextRequest) {
                   numero: cleanedTel.substring(2),
                   is_fax: false
                 });
+                console.log(`✅ Telefone ReceitaWS processado: (${cleanedTel.substring(0, 2)}) ${cleanedTel.substring(2)}`);
               }
             }
             
@@ -204,6 +220,7 @@ export async function GET(request: NextRequest) {
                   numero: tel.substring(2),
                   is_fax: false
                 });
+                console.log(`✅ Telefone alternativo: (${tel.substring(0, 2)}) ${tel.substring(2)}`);
               }
             }
             
@@ -216,14 +233,30 @@ export async function GET(request: NextRequest) {
                   numero: tel.substring(2),
                   is_fax: false
                 });
+                console.log(`✅ Telefone DDD+Tel: (${tel.substring(0, 2)}) ${tel.substring(2)}`);
               }
             }
             
+            console.log(`📋 Total de telefones encontrados: ${telefonesArray.length}`);
             return telefonesArray.filter(t => t.ddd && t.numero);
           })(),
           
-          // EMAIL - MAPEAMENTO COMPLETO
-          email: data.email || data.estabelecimento?.email || data.email || null,
+          // EMAIL - MAPEAMENTO COMPLETO COM DEBUG
+          email: (() => {
+            const emails = [
+              data.email,
+              data.estabelecimento?.email,
+              data.email
+            ].filter(e => e && e.trim() !== '');
+            
+            console.log(`🔧 Mapeando emails para ${api.name}:`, {
+              'data.email': data.email,
+              'data.estabelecimento?.email': data.estabelecimento?.email,
+              'emails encontrados': emails
+            });
+            
+            return emails[0] || null;
+          })(),
           
           // Informações fiscais
           opcao_simples: data.opcao_simples || data.simples?.simples === 'Sim' || data.opcao_pelo_simples ? 'S' : 'N',

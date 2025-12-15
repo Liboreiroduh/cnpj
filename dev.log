@@ -734,3 +734,24 @@ Tentando API: OpenCNPJ - https://api.opencnpj.org/cnpj/23246139000115
 Tentando API: ReceitaWS (backup) - https://receitaws.com.br/v1/cnpj/23246139000115
 ✅ Sucesso com ReceitaWS (backup): {"abertura":"10/09/2015","situacao":"ATIVA","tipo":"MATRIZ","nome":"MACHINE LTDA","fantasia":"MACHINE LED","porte":"MICRO EMPRESA","natureza_juridica":"206-2 - Sociedade Empresária Limitada","atividad
  GET /api/cnpj-multi?cnpj=23246139000115 200 in 1788ms
+ ✓ Compiled in 442ms (738 modules)
+ ✓ Compiled in 220ms (352 modules)
+ ✓ Compiled in 193ms (352 modules)
+ ✓ Compiled /api/cnpj-multi in 198ms (404 modules)
+Tentando API: CNPJ.ws (pública) - MELHOR CONTATOS - https://publica.cnpj.ws/cnpj/45259906000163
+✅ Sucesso com CNPJ.ws (pública) - MELHOR CONTATOS: {"cnpj_raiz":"45259906","razao_social":"MOC IMPERMEABILIZANTES COMERCIO LTDA","capital_social":"40000.00","responsavel_federativo":"","atualizado_em":"2025-12-13T03:00:00.000Z","porte":{"id":"01","des
+🔍 Mapeando telefones para CNPJ.ws (pública) - MELHOR CONTATOS: {
+  "data.telefone": undefined,
+  "data.estabelecimento?.telefone1": "98566015",
+  "data.estabelecimento?.ddd1": "38",
+  "data.telefone1": undefined,
+  "data.ddd_telefone_1": undefined,
+}
+✅ Telefone CNPJ.ws: (38) 98566015
+📋 Total de telefones encontrados: 1
+🔧 Mapeando emails para CNPJ.ws (pública) - MELHOR CONTATOS: {
+  "data.email": undefined,
+  "data.estabelecimento?.email": "almeidajunior.moc@gmail.com",
+  "emails encontrados": [ "almeidajunior.moc@gmail.com" ],
+}
+ GET /api/cnpj-multi?cnpj=45259906000163 200 in 2482ms
